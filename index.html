@@ -176,7 +176,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 
 /* AI */
 #ai{background:var(--bg)}
-.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.ai-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:start}
 .ai-tools-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px;align-items:flex-end}
 .ai-tool-item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .ai-tool-logo{width:38px;height:38px;border-radius:10px;object-fit:contain;background:var(--white);border:1px solid var(--border);padding:6px}
@@ -186,19 +186,14 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card:hover{border-color:var(--coral);transform:translateX(5px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
 .ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
-.chat-widget{background:var(--white);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border)}
-.chat-widget h3{font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:2px;color:var(--ink)}
-.chat-sub{font-size:.71rem;color:var(--muted);margin-bottom:11px}
-.chat-msgs{background:var(--bg);border-radius:var(--r);padding:12px;min-height:155px;max-height:210px;overflow-y:auto;border:1px solid var(--border);display:flex;flex-direction:column;gap:7px;margin-bottom:9px}
-.bubble{padding:8px 11px;border-radius:11px;font-size:.77rem;line-height:1.55;max-width:87%}
-.bubble.u{background:var(--coral);color:white;align-self:flex-end;border-bottom-right-radius:3px}
-.bubble.a{background:var(--coral-light);color:var(--ink);align-self:flex-start;border-bottom-left-radius:3px}
-.bubble.t{opacity:.5;font-style:italic}
-.chat-row{display:flex;gap:6px}
-.chat-in{flex:1;padding:8px 13px;border:1.5px solid var(--border);border-radius:100px;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;cursor:none;transition:border-color .2s;background:var(--bg)}
-.chat-in:focus{border-color:var(--coral)}
-.chat-btn{padding:8px 15px;background:var(--coral);color:white;border:none;border-radius:100px;font-size:.78rem;cursor:none;transition:opacity .2s}
-.chat-btn:hover{opacity:.82}
+.contact-fab-wrap{position:fixed;right:22px;bottom:22px;z-index:1100;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.contact-fab-toggle{width:58px;height:58px;border-radius:50%;border:none;background:var(--coral);color:white;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 12px 32px rgba(232,96,60,.25);transition:transform .2s,box-shadow .2s}
+.contact-fab-toggle:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,96,60,.32)}
+.contact-fab-menu{display:flex;flex-direction:column;gap:10px;align-items:flex-end;opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.contact-fab-wrap.open .contact-fab-menu{opacity:1;transform:none;pointer-events:auto}
+.contact-fab-menu a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--coral);color:white;text-decoration:none;font-size:.82rem;font-weight:600;box-shadow:0 10px 24px rgba(232,96,60,.2);transition:transform .2s,background .2s}
+.contact-fab-menu a:hover{transform:translateY(-2px);background:var(--coral-dark)}
+.contact-fab-label{font-size:.8rem;font-weight:600}
 
 /* BEYOND */
 #beyond{background:var(--white)}
@@ -419,17 +414,6 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
       <div class="ai-tools-row" id="aitools"></div>
       <div class="ai-cards" id="aicards"></div>
     </div>
-    <div class="reveal">
-      <div class="chat-widget">
-        <h3>Ask me anything ✦</h3>
-        <p class="chat-sub">Powered by Claude · Ask about my work, hobbies, or career</p>
-        <div class="chat-msgs" id="cm"><div class="bubble a">Hi! I'm Shruti's assistant. Ask me anything about her work, experience, or interests 👋</div></div>
-        <div class="chat-row">
-          <input class="chat-in" id="ci" type="text" placeholder="Ask something…"/>
-          <button class="chat-btn" id="cb">→</button>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -485,6 +469,14 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   </div>
 </section>
 <footer>Built with curiosity, Claude, and a lot of vibe coding. © 2025 Shruti Singh.</footer>
+
+<div class="contact-fab-wrap" id="contact-fab-wrap">
+  <div class="contact-fab-menu" id="contact-fab-menu">
+    <a href="mailto:shrutiisiingh99@gmail.com"><span>✉️</span><span class="contact-fab-label">Email</span></a>
+    <a href="https://www.linkedin.com/in/shruti-singh-26b752186" target="_blank" rel="noopener noreferrer"><span>💼</span><span class="contact-fab-label">LinkedIn</span></a>
+  </div>
+  <button class="contact-fab-toggle" id="contact-fab-toggle" type="button" aria-label="Open contact options" aria-expanded="false">✉️</button>
+</div>
 
 <script>
 const EXP=[
@@ -660,38 +652,30 @@ function drawT(x,y,r){
 (function gl(){ctx.clearRect(0,0,cv.width,cv.height);tg.x+=tg.vx;tg.y+=tg.vy;if(tg.x-tg.r<0||tg.x+tg.r>cv.width)tg.vx*=-1;if(tg.y-tg.r<0||tg.y+tg.r>cv.height)tg.vy*=-1;rips=rips.filter(r=>r.o>0);rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});drawT(tg.x,tg.y,tg.r);requestAnimationFrame(gl);})();
 cv.addEventListener("click",e=>{const rect=cv.getBoundingClientRect(),cx=e.clientX-rect.left,cy=e.clientY-rect.top,d=Math.hypot(cx-tg.x,cy-tg.y);if(d<=tg.r){const p=d<tg.r*.12?10:d<tg.r*.38?7:d<tg.r*.68?4:1;score+=p;document.getElementById("sv").textContent=score;document.getElementById("gm").textContent={10:"Bullseye! 🎯",7:"Great shot! ✨",4:"Good hit! 👍",1:"Hit! Keep going"}[p];rips.push({x:tg.x,y:tg.y,rad:tg.r,o:.8});const sp=Math.hypot(tg.vx*=1.08,tg.vy*=1.08);if(sp>6.5){tg.vx=tg.vx/sp*6.5;tg.vy=tg.vy/sp*6.5;}}else{document.getElementById("gm").textContent="Missed! Steady your aim 🫁";}});
 
-// CHAT
-const CONTEXT=`You are an AI assistant on Shruti Singh's personal portfolio website. Answer ONLY questions about Shruti based on the information below. Keep answers warm and concise (2-4 sentences). If asked anything not covered here or outside Shruti's profile, respond: "I don't have that information, but you can reach Shruti directly at shrutiisiingh99@gmail.com — she'd be happy to answer!"
-
-ABOUT SHRUTI:
-- Product Analyst at Altimetrik since May 2025, working on a Predictive Insights Center for global logistics client. Product Owner of 10-member cross-functional team. 4 Program Increments. Uses Amplitude, Jira, custom GPTs.
-- MBA Marketing, XIMB Bhubaneswar 2025 (CGPA 6.79). B.A. Economics, Mithibai College Mumbai 2020 (79.3%). Class XII 86.62%, Class X 91.33%.
-- The CSR Journal (Jan 2021–Aug 2022, 20 months): Senior Executive BD. Won Young Achiever Award from CEO for Pan India collaboration on CSR Excellence Awards.
-- Emami Ltd. Summer Intern 2024. YES Foundation Fellow 2019 at Yuva Parivartan NGO Mumbai.
-- Skills: Product Marketing, GTM Strategy, Agile/Scrum, Jira, Amplitude, Confluence, Custom GPTs, Market Research, Stakeholder Management, Backlog Prioritisation, Roadmap Planning.
-- Achievements: AIR 157 at 63rd National Shooting Championship, qualified India Team Trials, Silver Medal Mumbai Games 2020, National Semi-Finalist GRAD Galderma 2024, Young Achiever Award CSR Journal 2021.
-- Hobbies: Competitive Air Rifle shooting, deliberate reading, vibe coding with AI, exploring cities on foot like a local.
-- Books read: Not Without My Daughter, Siddhartha, The Alchemist, Forest of Enchantments, The God Delusion, Meditations (Marcus Aurelius), Why I Am an Atheist (Bhagat Singh), Ikigai, The Vegetarian (Han Kang).
-- Informally helps friends and family with product/marketing strategy.
-- Based in Bengaluru. Contact: shrutiisiingh99@gmail.com | LinkedIn: shruti-singh-26b752186`;
-
-const cm=document.getElementById("cm"),ci=document.getElementById("ci"),cb=document.getElementById("cb");
-async function sendChat(){
-  const msg=ci.value.trim();if(!msg)return;ci.value="";
-  cm.innerHTML+=`<div class="bubble u">${msg}</div>`;
-  cm.innerHTML+=`<div class="bubble a t" id="typ">Thinking…</div>`;
-  cm.scrollTop=cm.scrollHeight;
-  try{
-    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,system:CONTEXT})});
-    const d=await res.json();
-    const reply=d.content?.[0]?.text||"I'm not sure — try asking something else!";
-    document.getElementById("typ").remove();
-    cm.innerHTML+=`<div class="bubble a">${reply}</div>`;
-  }catch(e){document.getElementById("typ").remove();cm.innerHTML+=`<div class="bubble a">Oops, try again!</div>`;}
-  cm.scrollTop=cm.scrollHeight;
+const fabWrap=document.getElementById("contact-fab-wrap"),fabToggle=document.getElementById("contact-fab-toggle"),fabMenu=document.getElementById("contact-fab-menu");
+if(fabWrap&&fabToggle&&fabMenu){
+  fabToggle.addEventListener("click",e=>{
+    e.stopPropagation();
+    const open=fabWrap.classList.toggle("open");
+    fabToggle.setAttribute("aria-expanded",String(open));
+  });
+  fabMenu.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{
+    fabWrap.classList.remove("open");
+    fabToggle.setAttribute("aria-expanded","false");
+  }));
+  document.addEventListener("click",e=>{
+    if(!fabWrap.contains(e.target)){
+      fabWrap.classList.remove("open");
+      fabToggle.setAttribute("aria-expanded","false");
+    }
+  });
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+      fabWrap.classList.remove("open");
+      fabToggle.setAttribute("aria-expanded","false");
+    }
+  });
 }
-cb.addEventListener("click",sendChat);
-ci.addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 </script>
 </body>
 </html>
