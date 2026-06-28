@@ -160,17 +160,17 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 #books{background:var(--white)}
 .books-intro{font-size:.9rem;color:var(--mid);max-width:580px;margin-bottom:32px;line-height:1.75}
 .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:15px}
-.book-card{height:225px;perspective:1000px;cursor:none}
-.book-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s}
+.book-card{height:auto;perspective:1000px;cursor:none}
+.book-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .5s}
 .book-card:hover .book-inner{transform:rotateY(180deg)}
-.book-front,.book-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);overflow:hidden}
+.book-front,.book-back{backface-visibility:hidden;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .book-front{background:var(--white)}
-.book-cover-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:1}
-.book-front-content{position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;background:none}
-.book-emoji{font-size:1.5rem;position:absolute;top:12px;left:12px}
-.book-title{font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:700;line-height:1.2;color:#111;text-shadow:none}
-.book-author{font-size:.68rem;opacity:.9;margin-top:3px;color:#333;text-shadow:none}
-.book-back{background:var(--coral-light);transform:rotateY(180deg);padding:14px;display:flex;flex-direction:column;justify-content:center}
+.book-cover-img{width:100%;height:160px;object-fit:cover;opacity:1}
+.book-front-content{padding:10px;display:flex;flex-direction:column;justify-content:center;background:white;flex:1}
+.book-emoji{display:none}
+.book-title{font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;line-height:1.2;color:#111;text-shadow:none}
+.book-author{font-size:.7rem;opacity:.7;margin-top:3px;color:#666;text-shadow:none}
+.book-back{background:var(--coral-light);transform:rotateY(180deg);padding:14px;display:flex;flex-direction:column;justify-content:center;min-height:225px}
 .book-back p{font-size:.77rem;color:var(--mid);line-height:1.6}
 .book-tag{margin-top:9px;font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);background:var(--white);padding:3px 8px;border-radius:100px;display:inline-block}
 
@@ -526,16 +526,16 @@ const SKILLS=["Product Marketing","GTM Strategy","Market Research","Customer Ins
 
 // To find book cover images: go to amazon.in, search the book, right click the cover image, click Copy Image Address, and paste it as the cover URL. Format: cover: YOUR_COPIED_URL
 const BOOKS=[
-  {emoji:"📖",title:"Not Without My Daughter",author:"Betty Mahmoody",cover:"https://covers.openlibrary.org/b/isbn/9780312924157-M.jpg",take:"Raw, visceral, impossible to put down. A reminder that freedom is never guaranteed — and that a mother's will can move mountains.",tag:"True Story"},
-  {emoji:"🌿",title:"Siddhartha",author:"Hermann Hesse",cover:"https://covers.openlibrary.org/b/isbn/9780553208849-M.jpg",take:"Made me question what 'success' actually means. The river scene alone is worth the whole book.",tag:"Philosophy"},
-  {emoji:"✨",title:"The Alchemist",author:"Paulo Coelho",cover:"https://covers.openlibrary.org/b/isbn/9780062315007-M.jpg",take:"The journey IS the treasure felt clichéd until I actually lived it. Read it anyway.",tag:"Fiction"},
-  {emoji:"🏹",title:"Forest of Enchantments",author:"Chitra Banerjee Divakaruni",cover:"https://covers.openlibrary.org/b/isbn/9780230331785-M.jpg",take:"Sita's story, finally told on her terms. Quiet, powerful, deeply feminist.",tag:"Mythology"},
-  {emoji:"🔬",title:"The God Delusion",author:"Richard Dawkins",cover:"https://covers.openlibrary.org/b/isbn/9780618680009-M.jpg",take:"Uncomfortable and brilliant. Pushed me to question things I'd taken for granted my whole life.",tag:"Science"},
-  {emoji:"⚔️",title:"Meditations",author:"Marcus Aurelius",cover:"https://covers.openlibrary.org/b/isbn/9780140449334-M.jpg",take:"A Roman emperor's private notes on staying humble. Timeless doesn't begin to cover it.",tag:"Stoicism"},
-  {emoji:"✊",title:"Why I Am an Atheist",author:"Bhagat Singh",cover:"https://covers.openlibrary.org/b/isbn/9788172010843-M.jpg",take:"Sixty pages that hit harder than most books ten times the length. Courageous and heartbreaking.",tag:"Politics"},
-  {emoji:"🌸",title:"Ikigai",author:"García & Miralles",cover:"https://covers.openlibrary.org/b/isbn/9780143130727-M.jpg",take:"Find the intersection of what you love, what you're good at, and what the world needs. Still working on mine.",tag:"Purpose"},
-  {emoji:"🥗",title:"The Vegetarian",author:"Han Kang",cover:"https://covers.openlibrary.org/b/isbn/9781846276033-M.jpg",take:"Deeply unsettling and beautiful. A woman asserting autonomy in a world that won't allow it.",tag:"Literary Fiction"},
-  {emoji:"😴",title:"Why We Sleep",author:"Matthew Walker",cover:"",take:"Science-backed insights into sleep that changed how I understand rest and recovery.",tag:"Science"}
+  {title:"Not Without My Daughter",author:"Betty Mahmoody",cover:"https://books.google.com/books/content?id=YlVHAAAAMAAJ&printsec=frontcover&img=1&zoom=1",take:"Raw, visceral, impossible to put down. A reminder that freedom is never guaranteed — and that a mother's will can move mountains.",tag:"True Story"},
+  {title:"Siddhartha",author:"Hermann Hesse",cover:"https://covers.openlibrary.org/b/isbn/9780553208849-M.jpg",take:"Made me question what 'success' actually means. The river scene alone is worth the whole book.",tag:"Philosophy"},
+  {title:"The Alchemist",author:"Paulo Coelho",cover:"https://covers.openlibrary.org/b/isbn/9780062315007-M.jpg",take:"The journey IS the treasure felt clichéd until I actually lived it. Read it anyway.",tag:"Fiction"},
+  {title:"Forest of Enchantments",author:"Chitra Banerjee Divakaruni",cover:"https://covers.openlibrary.org/b/isbn/9780230331785-M.jpg",take:"Sita's story, finally told on her terms. Quiet, powerful, deeply feminist.",tag:"Mythology"},
+  {title:"The God Delusion",author:"Richard Dawkins",cover:"https://covers.openlibrary.org/b/isbn/9780618680009-M.jpg",take:"Uncomfortable and brilliant. Pushed me to question things I'd taken for granted my whole life.",tag:"Science"},
+  {title:"Meditations",author:"Marcus Aurelius",cover:"https://covers.openlibrary.org/b/isbn/9780140449334-M.jpg",take:"A Roman emperor's private notes on staying humble. Timeless doesn't begin to cover it.",tag:"Stoicism"},
+  {title:"Why I Am an Atheist",author:"Bhagat Singh",cover:"https://covers.openlibrary.org/b/isbn/9788172010843-M.jpg",take:"Sixty pages that hit harder than most books ten times the length. Courageous and heartbreaking.",tag:"Politics"},
+  {title:"Ikigai",author:"García & Miralles",cover:"https://covers.openlibrary.org/b/isbn/9780143130727-M.jpg",take:"Find the intersection of what you love, what you're good at, and what the world needs. Still working on mine.",tag:"Purpose"},
+  {title:"The Vegetarian",author:"Han Kang",cover:"https://covers.openlibrary.org/b/isbn/9781846276033-M.jpg",take:"Deeply unsettling and beautiful. A woman asserting autonomy in a world that won't allow it.",tag:"Literary Fiction"},
+  {title:"Why We Sleep",author:"Matthew Walker",cover:"https://books.google.com/books/content?id=84aMDQAAQBAJ&printsec=frontcover&img=1&zoom=1",take:"Science-backed insights into sleep that changed how I understand rest and recovery and improved my relationship with it.",tag:"Science"}
 ];
 
 const AI_TOOLS=[
@@ -605,7 +605,6 @@ BOOKS.forEach(b=>{
   document.getElementById("bg").innerHTML+=`<div class="book-card"><div class="book-inner">
     <div class="book-front">
       <img class="book-cover-img" src="${b.cover}" alt="${b.title}" onerror="this.style.display='none'"/>
-      <div class="book-emoji">${b.emoji}</div>
       <div class="book-front-content"><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div></div>
     </div>
     <div class="book-back"><p>${b.take}</p><span class="book-tag">${b.tag}</span></div>
