@@ -681,16 +681,14 @@ async function sendChat(){
   cm.innerHTML+=`<div class="bubble u">${msg}</div>`;
   cm.innerHTML+=`<div class="bubble a t" id="typ">Thinking…</div>`;
   cm.scrollTop=cm.scrollHeight;
-try {
-  const res = await fetch('/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: msg, system: CONTEXT })
-  });
-  const d = await res.json();
-  const reply = d.content?.[0]?.text || "I'm not sure — try asking something else!";
-  document.getElementById("typ").remove();
-  cm.innerHTML += `<div class="bubble a">${{reply}}</div>`;
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:CONTEXT,messages:[{role:"user",content:msg}]})});
+    const d=await res.json();
+    const reply=d.content?.[0]?.text||"I'm not sure — try asking something else!";
+    document.getElementById("typ").remove();
+    cm.innerHTML+=`<div class="bubble a">${reply}</div>`;
+  }catch(e){document.getElementById("typ").remove();cm.innerHTML+=`<div class="bubble a">Oops, try again!</div>`;}
+  cm.scrollTop=cm.scrollHeight;
 }
 cb.addEventListener("click",sendChat);
 ci.addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
