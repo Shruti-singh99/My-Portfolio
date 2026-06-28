@@ -1,27 +1,16 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   const { message, system } = req.body;
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        system: system,
-        messages: [{ role: 'user', content: message }]
-      })
+      headers: { 'Content-Type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: system, messages: [{ role: 'user', content: message }] })
     });
-    const data = await response.json();
-    const text = data?.content?.[0]?.text;
-    res.status(200).json({ reply: text || "I'm not sure — try asking something else!" });
-  } catch (error) {
-    res.status(500).json({ reply: 'Something went wrong' });
+    const d = await r.json();
+    console.log('RAW:', JSON.stringify(d));
+    res.status(200).json({ reply: d?.content?.[0]?.text || 'No text found' });
+  } catch (e) {
+    res.status(500).json({ reply: e.message });
   }
 }
