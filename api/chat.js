@@ -19,7 +19,8 @@ export default async function handler(req, res) {
       })
     });
     const data = await response.json();
-    res.status(200).json(data);
+    const text = data.content?.[0]?.text || "I'm not sure — try asking something else!";
+    res.status(200).json({ content: [{ text }] });
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong' });
   }
