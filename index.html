@@ -123,7 +123,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 #skills{background:var(--white)}
 .career-tl{margin-bottom:44px}
 .career-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);justify-items:center;align-items:center;padding:12px 0;margin-bottom:10px}
-.career-line{position:absolute;top:50%;left:12.5%;right:12.5%;height:2px;background:var(--coral-mid);transform:translateY(-50%);z-index:0;pointer-events:none}
+.career-track::before{content:'';position:absolute;top:50%;left:12.5%;right:12.5%;height:2px;background:var(--coral-mid);transform:translateY(-50%);pointer-events:none}
 .career-node{border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;flex-shrink:0;line-height:1}
 .career-node.n1{width:44px;height:44px;font-size:1.1rem;background:var(--coral-light);border:2px solid var(--coral-mid)}
 .career-node.n2{width:50px;height:50px;font-size:1.2rem;background:rgba(232,96,60,.18);border:2px solid var(--coral-mid)}
@@ -133,7 +133,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .career-lbls span{font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:700;color:var(--ink)}
 .career-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:44px}
 .career-chip{background:var(--coral-light);border-radius:10px;padding:12px;font-size:11.5px;color:var(--mid);text-align:center;line-height:1.5}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.skills-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .skill-pill{background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:10px 17px;font-size:.8rem;font-weight:500;color:var(--mid);text-align:center;position:relative;overflow:hidden;transition:color .3s}
 .skill-pill::before{content:'';position:absolute;inset:0;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:0}
 .skill-pill:hover::before{transform:scaleX(1)}
@@ -243,7 +243,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .hero-photo-wrap{width:200px;height:240px}
   .about-grid,.shoot-layout,.ai-grid,.beyond-grid{grid-template-columns:1fr;gap:28px}
   .career-track,.career-lbls,.career-chips{grid-template-columns:repeat(2,1fr)}
-  .career-line{display:none}
+  .career-track::before{display:none}
   .shoot-photo-stack{height:300px}
   .hero-name{font-size:3rem;letter-spacing:-1px}
   #contact{padding:60px 22px} footer{padding:18px 22px}
@@ -375,7 +375,6 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   <h2 class="st">One superpower.<br/>Many origins.</h2>
   <div class="career-tl reveal">
     <div class="career-track">
-      <div class="career-line"></div>
       <div class="career-node n1">🤝</div>
       <div class="career-node n2">🔬</div>
       <div class="career-node n3">📦</div>
@@ -388,10 +387,10 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
       <span>AI and vibe</span>
     </div>
     <div class="career-chips">
-      <div class="career-chip">Listened for pain before pitching solutions</div>
-      <div class="career-chip">100+ interviews, validated without bias</div>
-      <div class="career-chip">Roadmaps and discovery, 4 PIs deep</div>
-      <div class="career-chip">AI as daily workflow, not a demo</div>
+      <div class="career-chip">Exploring every avenue, finding opportunity in anything and everything</div>
+      <div class="career-chip">Questioning everything and looking deeper, in every role I've had</div>
+      <div class="career-chip">Owning roadmaps and leading discovery end-to-end</div>
+      <div class="career-chip">Moving faster by making AI part of how I think</div>
     </div>
   </div>
   <div class="skills-grid reveal" id="sg"></div>
