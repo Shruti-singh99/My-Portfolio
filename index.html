@@ -122,15 +122,15 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 /* SKILLS */
 #skills{background:var(--white)}
 .career-tl{margin-bottom:44px}
-.career-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);justify-items:center;align-items:center;padding:12px 0;margin-bottom:10px}
-.career-track::before{content:'';position:absolute;top:50%;left:12.5%;right:12.5%;height:2px;background:var(--coral-mid);transform:translateY(-50%);pointer-events:none}
+.career-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);padding-top:12px;padding-bottom:0;margin-bottom:12px}
+.career-track::before{content:'';position:absolute;top:43px;left:12.5%;right:12.5%;height:2px;background:var(--coral-mid);transform:translateY(-50%);pointer-events:none}
+.career-col{display:flex;flex-direction:column;align-items:center;gap:8px}
 .career-node{border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;flex-shrink:0;line-height:1}
 .career-node.n1{width:44px;height:44px;font-size:1.1rem;background:var(--coral-light);border:2px solid var(--coral-mid)}
 .career-node.n2{width:50px;height:50px;font-size:1.2rem;background:#F5C4B3;border:2px solid var(--coral-mid)}
 .career-node.n3{width:56px;height:56px;font-size:1.3rem;background:#F0997B;border:2px solid var(--coral)}
 .career-node.n4{width:62px;height:62px;font-size:1.4rem;background:var(--coral);border:2px solid var(--coral)}
-.career-lbls{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;margin-bottom:16px}
-.career-lbls span{font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:700;color:var(--ink)}
+.career-lbl{font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:700;color:var(--ink);text-align:center}
 .career-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:44px}
 .career-chip{background:var(--coral-light);border-radius:10px;padding:12px;font-size:11.5px;color:var(--mid);text-align:center;line-height:1.5}
 .skills-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -245,8 +245,11 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .hero-name{font-size:2.1rem;letter-spacing:-1px}
   .hero-scroll{left:22px;bottom:16px}
   .about-grid,.shoot-layout,.ai-grid,.beyond-grid{grid-template-columns:1fr;gap:28px}
-  .career-track,.career-lbls,.career-chips{grid-template-columns:repeat(2,1fr)}
+  .career-track,.career-chips{grid-template-columns:repeat(2,1fr)}
   .career-track::before{display:none}
+  .tl-head{flex-wrap:wrap;align-items:center}
+  .tl-head-left{flex:1;min-width:0}
+  .tl-date{white-space:normal;margin-left:0;flex-basis:100%;padding-left:41px;margin-top:2px}
   .shoot-photo-stack{height:300px}
   #contact{padding:60px 22px} footer{padding:18px 22px}
 }
@@ -377,16 +380,22 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   <h2 class="st">One superpower.<br/>Many origins.</h2>
   <div class="career-tl reveal">
     <div class="career-track">
-      <div class="career-node n1">🤝</div>
-      <div class="career-node n2">🔬</div>
-      <div class="career-node n3">📦</div>
-      <div class="career-node n4">🤖</div>
-    </div>
-    <div class="career-lbls">
-      <span>Business dev</span>
-      <span>Research</span>
-      <span>Product</span>
-      <span>AI and vibe</span>
+      <div class="career-col">
+        <div class="career-node n1">🤝</div>
+        <span class="career-lbl">Business dev</span>
+      </div>
+      <div class="career-col">
+        <div class="career-node n2">🔬</div>
+        <span class="career-lbl">Research</span>
+      </div>
+      <div class="career-col">
+        <div class="career-node n3">📦</div>
+        <span class="career-lbl">Product</span>
+      </div>
+      <div class="career-col">
+        <div class="career-node n4">🤖</div>
+        <span class="career-lbl">AI and vibe</span>
+      </div>
     </div>
     <div class="career-chips">
       <div class="career-chip">Exploring every avenue, finding opportunity in anything and everything</div>
