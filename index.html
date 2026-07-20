@@ -247,10 +247,13 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .about-grid,.shoot-layout,.ai-grid,.beyond-grid{grid-template-columns:1fr;gap:28px}
   .career-track,.career-chips{grid-template-columns:repeat(2,1fr)}
   .career-track::before{display:none}
-  .tl-head{flex-wrap:wrap;align-items:center}
-  .tl-head-left{flex:1;min-width:0}
-  .tl-date{white-space:normal;margin-left:0;flex-basis:100%;padding-left:41px;margin-top:2px}
+  .tl-head{flex-direction:column;align-items:flex-start;gap:2px;position:relative;padding-right:28px}
+  .tl-head-left{width:100%}
+  .tl-role{font-size:.82rem}
+  .tl-chev{position:absolute;top:16px;right:14px;margin-left:0}
+  .tl-date{white-space:normal;margin-left:0;padding-left:41px;margin-top:4px}
   .shoot-photo-stack{height:300px}
+  .hero-blob.b2{display:none}
   #contact{padding:60px 22px} footer{padding:18px 22px}
 }
 </style>
