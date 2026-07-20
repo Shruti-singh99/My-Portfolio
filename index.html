@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Shruti Singh</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -74,11 +75,10 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:68px;align-items:center}
 .about-text p{font-size:1rem;line-height:1.85;color:var(--mid);margin-bottom:16px}
 .about-text p strong{color:var(--ink);font-weight:600}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.stat{background:var(--white);border-radius:var(--r);padding:22px 18px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
-.stat:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(232,96,60,.1)}
-.stat-n{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:800;color:var(--coral);line-height:1;margin-bottom:4px}
-.stat-l{font-size:.74rem;color:var(--muted);font-weight:500}
+.about-quote{border-left:3px solid var(--coral);padding-left:20px;font-size:19px;font-weight:500;color:var(--ink);margin-bottom:32px;line-height:1.55}
+.about-cards{display:flex;flex-direction:column;gap:14px}
+.about-card{background:var(--coral-light);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:13px;font-size:.88rem;color:var(--mid);font-weight:500;line-height:1.45}
+.about-card i{color:var(--coral);font-size:1rem;flex-shrink:0;width:16px;text-align:center}
 
 /* EDUCATION */
 #education{background:var(--white)}
@@ -301,11 +301,13 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
       <p>I started in business development, moved through market research and GTM strategy, and landed in product — where <strong>everything finally clicked</strong>. Understanding users isn't something I do for work. It's how I think.</p>
       <p>At Altimetrik, I own the product roadmap for a global logistics intelligence platform — translating messy client needs into clean, scalable solutions. Outside of work, I'm building things with AI, reading slowly and deliberately, and exploring cities on foot like a local.</p>
     </div>
-    <div class="about-stats reveal">
-      <div class="stat"><div class="stat-n">May '25</div><div class="stat-l">Product Analyst at Altimetrik</div></div>
-      <div class="stat"><div class="stat-n">10</div><div class="stat-l">Cross-functional team members</div></div>
-      <div class="stat"><div class="stat-n">AIR 157</div><div class="stat-l">National Shooting Championship</div></div>
-      <div class="stat"><div class="stat-n">MBA</div><div class="stat-l">Marketing, XIMB 2025</div></div>
+    <div class="about-sidebar reveal">
+      <p class="about-quote">Numbers tell you what happened. People tell you why. I chase both.</p>
+      <div class="about-cards">
+        <div class="about-card"><i class="fa-solid fa-users"></i><span>I decode why people choose, not just what they buy</span></div>
+        <div class="about-card"><i class="fa-solid fa-compass"></i><span>I turn ambiguity into roadmaps</span></div>
+        <div class="about-card"><i class="fa-solid fa-chart-bar"></i><span>I read behaviour data before I trust opinions</span></div>
+      </div>
     </div>
   </div>
 </section>
