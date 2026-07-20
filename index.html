@@ -21,7 +21,7 @@
   --border:#EBEBEB;
   --r:12px;--r-lg:20px;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Inter',sans-serif;background:var(--white);color:var(--ink);cursor:auto;overflow-x:hidden}
 #cr{display:none}
 #cd{display:none}
@@ -238,14 +238,16 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
 @media(max-width:900px){
   nav{padding:13px 22px}.nav-links{display:none}
   section{padding:60px 22px}
-  #hero{grid-template-columns:1fr;padding:100px 22px 60px;gap:36px}
-  .hero-photo-col{justify-content:flex-start}
-  .hero-photo-wrap{width:200px;height:240px}
+  #hero{grid-template-columns:1fr auto;padding:90px 22px 50px;gap:16px;align-items:start}
+  .hero-photo-col{justify-content:flex-start;padding-top:34px}
+  .hero-photo-wrap{width:96px;height:118px}
+  .hero-ring{display:none}
+  .hero-name{font-size:2.1rem;letter-spacing:-1px}
+  .hero-scroll{left:22px;bottom:16px}
   .about-grid,.shoot-layout,.ai-grid,.beyond-grid{grid-template-columns:1fr;gap:28px}
   .career-track,.career-lbls,.career-chips{grid-template-columns:repeat(2,1fr)}
   .career-track::before{display:none}
   .shoot-photo-stack{height:300px}
-  .hero-name{font-size:3rem;letter-spacing:-1px}
   #contact{padding:60px 22px} footer{padding:18px 22px}
 }
 </style>
