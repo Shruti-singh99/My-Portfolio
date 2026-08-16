@@ -144,7 +144,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 #shooting{background:var(--bg)}
 .shoot-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
 .shoot-photo-stack{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:480px}
-.shoot-img-main{grid-column:1;grid-row:1/3;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:var(--r-lg);box-shadow:0 20px 48px rgba(232,96,60,.12)}
+.shoot-img-main{grid-column:1;grid-row:1/3;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:var(--r-lg);box-shadow:0 20px 48px rgba(232,96,60,.12)}
 .shoot-img-2{grid-column:2;grid-row:1;width:100%;height:100%;object-fit:cover;border-radius:var(--r-lg);box-shadow:0 12px 32px rgba(0,0,0,.12);border:3px solid var(--white)}
 .shoot-img-3{grid-column:2;grid-row:2;width:100%;height:100%;object-fit:cover;border-radius:var(--r-lg);box-shadow:0 8px 24px rgba(0,0,0,.1);border:3px solid var(--white)}
 .fact-card{background:var(--white);border-radius:var(--r);padding:16px 18px;border-left:3px solid var(--coral);margin-bottom:12px}
@@ -428,10 +428,10 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
       <div class="fact-card"><h4>What it taught me about product</h4><p>One flinch ruins a shot. One bad assumption ruins a roadmap. Both are invisible until the result shows up.</p></div>
       <div class="target-game">
         <h3>🎯 Test your aim</h3>
-        <p>Click the target — earns points, speeds up on hits.</p>
+        <p>Click when the crosshair is on the bullseye — closer to center scores higher.</p>
         <canvas id="tgt" width="290" height="190"></canvas>
         <div class="gscore">Score: <span id="sv">0</span></div>
-        <div class="gmsg" id="gm">Click the target to start!</div>
+        <div class="gmsg" id="gm">Click when the crosshair lines up!</div>
       </div>
     </div>
   </div>
@@ -689,21 +689,48 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
-let score=0,tg={x:145,y:95,r:23,vx:2,vy:1.4},rips=[];
-function drawT(x,y,r){
-  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
-  [0.9,0.8,0.7,0.6,0.5].forEach(f=>{
-    ctx.beginPath();ctx.arc(x,y,r*f,0,Math.PI*2);ctx.strokeStyle="#333";ctx.lineWidth=0.6;ctx.stroke();
-  });
-  ctx.beginPath();ctx.arc(x,y,r*0.45,0,Math.PI*2);ctx.fillStyle="#111";ctx.fill();
-  [0.35,0.25].forEach(f=>{
-    ctx.beginPath();ctx.arc(x,y,r*f,0,Math.PI*2);ctx.strokeStyle="rgba(255,255,255,0.35)";ctx.lineWidth=0.5;ctx.stroke();
-  });
-  ctx.beginPath();ctx.arc(x,y,r*0.12,0,Math.PI*2);ctx.fillStyle="#000";ctx.fill();
-  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle="#333";ctx.lineWidth=1;ctx.stroke();
+const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
+let score=0,aim={x:cv.width*.2,y:cv.height*.3,vx:2.2,vy:1.5},rips=[];
+function drawTarget(){
+  ctx.fillStyle="#f5f5f0";ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
+  for(let i=9;i>=5;i--){ctx.beginPath();ctx.arc(TX,TY,TR*(i/10),0,Math.PI*2);ctx.strokeStyle="#bbb";ctx.lineWidth=0.7;ctx.stroke();}
+  ctx.beginPath();ctx.arc(TX,TY,TR*0.42,0,Math.PI*2);ctx.fillStyle="#E8603C";ctx.fill();
+  [0.34,0.26].forEach(f=>{ctx.beginPath();ctx.arc(TX,TY,TR*f,0,Math.PI*2);ctx.strokeStyle="rgba(255,210,195,0.55)";ctx.lineWidth=0.6;ctx.stroke();});
+  ctx.beginPath();ctx.arc(TX,TY,TR*0.14,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
+  ctx.beginPath();ctx.arc(TX,TY,TR*0.06,0,Math.PI*2);ctx.fillStyle="#f59e0b";ctx.fill();
+  ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.strokeStyle="#aaa";ctx.lineWidth=1;ctx.stroke();
 }
-(function gl(){ctx.clearRect(0,0,cv.width,cv.height);tg.x+=tg.vx;tg.y+=tg.vy;if(tg.x-tg.r<0||tg.x+tg.r>cv.width)tg.vx*=-1;if(tg.y-tg.r<0||tg.y+tg.r>cv.height)tg.vy*=-1;rips=rips.filter(r=>r.o>0);rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});drawT(tg.x,tg.y,tg.r);requestAnimationFrame(gl);})();
-cv.addEventListener("click",e=>{const rect=cv.getBoundingClientRect(),cx=e.clientX-rect.left,cy=e.clientY-rect.top,d=Math.hypot(cx-tg.x,cy-tg.y);if(d<=tg.r){const p=d<tg.r*.12?10:d<tg.r*.38?7:d<tg.r*.68?4:1;score+=p;document.getElementById("sv").textContent=score;document.getElementById("gm").textContent={10:"Bullseye! 🎯",7:"Great shot! ✨",4:"Good hit! 👍",1:"Hit! Keep going"}[p];rips.push({x:tg.x,y:tg.y,rad:tg.r,o:.8});const sp=Math.hypot(tg.vx*=1.08,tg.vy*=1.08);if(sp>6.5){tg.vx=tg.vx/sp*6.5;tg.vy=tg.vy/sp*6.5;}}else{document.getElementById("gm").textContent="Missed! Steady your aim 🫁";}});
+function drawCrosshair(x,y){
+  const arm=13,gap=5;
+  ctx.lineWidth=1.6;ctx.strokeStyle="#1a1a2e";
+  ctx.beginPath();ctx.moveTo(x-arm,y);ctx.lineTo(x-gap,y);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x+gap,y);ctx.lineTo(x+arm,y);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x,y-arm);ctx.lineTo(x,y-gap);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x,y+gap);ctx.lineTo(x,y+arm);ctx.stroke();
+  ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.strokeStyle="#E8603C";ctx.lineWidth=1.3;ctx.stroke();
+}
+(function gl(){
+  drawTarget();
+  aim.x+=aim.vx;aim.y+=aim.vy;
+  if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;
+  if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;
+  rips=rips.filter(r=>r.o>0);
+  rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
+  drawCrosshair(aim.x,aim.y);
+  requestAnimationFrame(gl);
+})();
+cv.addEventListener("click",()=>{
+  const d=Math.hypot(aim.x-TX,aim.y-TY);
+  if(d<=TR){
+    const p=d<TR*.06?10:d<TR*.14?9:d<TR*.26?8:d<TR*.34?7:d<TR*.42?5:d<TR*.6?3:1;
+    score+=p;document.getElementById("sv").textContent=score;
+    document.getElementById("gm").textContent={10:"Bullseye! 🎯",9:"Outstanding! ✨",8:"Great shot!",7:"Good hit! 👍",5:"Hit!",3:"Outer zone",1:"Barely in"}[p];
+    rips.push({x:aim.x,y:aim.y,rad:5,o:.85});
+    const sp=Math.hypot(aim.vx*=1.08,aim.vy*=1.08);
+    if(sp>6.5){aim.vx=aim.vx/sp*6.5;aim.vy=aim.vy/sp*6.5;}
+  }else{document.getElementById("gm").textContent="Missed! Steady your aim 🫁";}
+});
 
 const fabWrap=document.getElementById("contact-fab-wrap"),fabToggle=document.getElementById("contact-fab-toggle"),fabMenu=document.getElementById("contact-fab-menu");
 if(fabWrap&&fabToggle&&fabMenu){
