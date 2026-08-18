@@ -432,7 +432,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
         <h3>🎯 Test your aim</h3>
         <p>Click when the crosshair is on the bullseye — closer to center scores higher.</p>
         <canvas id="tgt" width="290" height="190"></canvas>
-        <div class="gscore">Score: <span id="sv">0</span> &nbsp;·&nbsp; Shot <span id="sh">0</span> of 5</div>
+        <div class="gscore"><div>Score: <span id="sv">0</span></div><div style="font-size:.82rem;font-weight:500;color:#b0aca6;margin-top:3px">Shot <span id="sh">0</span> of 5</div></div>
         <div class="gmsg" id="gm">Click when the crosshair lines up!</div>
         <button id="grst" onclick="gameReset()" style="margin-top:10px;padding:6px 18px;background:transparent;border:1px solid var(--coral);border-radius:100px;color:var(--coral);font-family:'Inter',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;letter-spacing:.04em">↺ Restart</button>
       </div>
@@ -694,8 +694,8 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
 const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
-let score=0,shots=0,gameOver=false,aim={x:cv.width*.2,y:cv.height*.3,vx:2.2,vy:1.5},rips=[];
-function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.vx=2.2;aim.vy=1.5;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
+let score=0,shots=0,gameOver=false,aim={x:cv.width*.2,y:cv.height*.3,vx:3.8,vy:2.6},rips=[];
+function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.vx=3.8;aim.vy=2.6;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
 function drawTarget(){
   ctx.fillStyle="#161613";ctx.fillRect(0,0,cv.width,cv.height);
   ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
