@@ -481,7 +481,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
         <h3>🎯 Test your aim</h3>
         <p>Click when the crosshair is on the bullseye — closer to center scores higher.</p>
         <canvas id="tgt" width="290" height="190"></canvas>
-        <div class="gscore">Score: <span id="sv">0</span> &nbsp;·&nbsp; Shot <span id="sh">0</span> of 5</div>
+        <div class="gscore"><div>Score: <span id="sv">0</span></div><div style="font-size:.82rem;font-weight:500;color:#b0aca6;margin-top:3px">Shot <span id="sh">0</span> of 5</div></div>
         <div class="gmsg" id="gm">Click when the crosshair lines up!</div>
         <button id="grst" onclick="gameReset()" style="margin-top:10px;padding:6px 18px;background:transparent;border:1px solid var(--coral);border-radius:100px;color:var(--coral);font-family:'Inter',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;letter-spacing:.04em">↺ Restart</button>
       </div>
@@ -765,7 +765,7 @@ function drawCrosshair(x,y){
 }
 (function gl(){
   drawTarget();
-  if(!gameOver){aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
+  if(!gameOver){aim.vx+=(TX-aim.x)*.007;aim.vy+=(TY-aim.y)*.007;aim.vx*=.993;aim.vy*=.993;aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<14){aim.x=14;aim.vx=Math.abs(aim.vx);}if(aim.x>cv.width-14){aim.x=cv.width-14;aim.vx=-Math.abs(aim.vx);}if(aim.y<14){aim.y=14;aim.vy=Math.abs(aim.vy);}if(aim.y>cv.height-14){aim.y=cv.height-14;aim.vy=-Math.abs(aim.vy);}}
   rips=rips.filter(r=>r.o>0);
   rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
   drawCrosshair(aim.x,aim.y);
@@ -780,7 +780,7 @@ cv.addEventListener("click",()=>{
     score+=p;document.getElementById("sv").textContent=score;
     if(shots<5){document.getElementById("gm").textContent={10:"Bullseye! 🎯",9:"Outstanding! ✨",8:"Great shot!",7:"Good hit! 👍",5:"Hit!",3:"Outer zone",1:"Barely in"}[p];}
     rips.push({x:aim.x,y:aim.y,rad:5,o:.85});
-    if(shots<5){const sp=Math.hypot(aim.vx*=1.08,aim.vy*=1.08);if(sp>6.5){aim.vx=aim.vx/sp*6.5;aim.vy=aim.vy/sp*6.5;}}
+    if(shots<5){aim.vx*=1.14;aim.vy*=1.14;}
   }else{
     if(shots<5)document.getElementById("gm").textContent="Missed! Steady your aim 🫁";
   }
