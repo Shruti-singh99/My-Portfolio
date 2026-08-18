@@ -717,7 +717,7 @@ function drawCrosshair(x,y){
 }
 (function gl(){
   drawTarget();
-  if(!gameOver){aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
+  if(!gameOver){aim.vx+=(TX-aim.x)*.018;aim.vy+=(TY-aim.y)*.018;aim.vx*=.98;aim.vy*=.98;aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
   rips=rips.filter(r=>r.o>0);
   rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
   drawCrosshair(aim.x,aim.y);
