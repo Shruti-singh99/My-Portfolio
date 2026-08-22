@@ -190,13 +190,30 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card:hover{border-color:var(--coral);transform:translateX(5px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
 .ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
-.ai-card-num{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);opacity:.65;margin-bottom:4px}
+.ai-card-num{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);opacity:.65;margin-bottom:0}
 .ai-card-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;line-height:1.4}
+#ai h2.st{margin-bottom:14px}
+.ai-tagline{font-size:1rem;color:var(--mid);margin-bottom:30px;line-height:1.55;letter-spacing:-.01em}
+.ai-vibe-phrase{font-style:normal;color:var(--ink);font-weight:600;position:relative;display:inline-block}
+.ai-vibe-phrase::after{content:'';position:absolute;left:0;bottom:-2px;width:100%;height:2.5px;background:var(--coral);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .55s cubic-bezier(.23,1,.32,1) .35s}
+.reveal.on .ai-vibe-phrase::after{transform:scaleX(1)}
+.ai-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.ai-card-tag{font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:3px 8px;border-radius:100px;border:1px solid var(--border);white-space:nowrap}
+.ai-card--playful:hover{background:var(--coral-light)}
+.ask-shruti-header{display:flex;align-items:center;gap:9px}
+.ask-badge{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--coral-light);color:var(--coral);padding:3px 9px;border-radius:100px;border:1px solid rgba(232,96,60,.22);flex-shrink:0}
+.ai-closing{margin-top:56px;padding-top:40px;border-top:1px solid var(--border);text-align:center}
+.ai-closing-pre{font-size:.92rem;color:var(--muted);margin-bottom:10px;letter-spacing:.01em}
+.ai-closing-main{font-family:'Outfit',sans-serif;font-size:clamp(1.85rem,4vw,2.65rem);font-weight:700;color:var(--ink);line-height:1.15}
+.ai-closing-arrow{color:var(--coral);display:inline-block;animation:bounce-down 1.5s ease-in-out infinite}
+@keyframes bounce-down{0%,100%{transform:translateY(0)}55%{transform:translateY(8px)}}
+@keyframes arrow-pulse{0%,100%{opacity:.3;transform:translateX(0)}50%{opacity:.7;transform:translateX(3px)}}
 .ai-workflow{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:18px 20px;background:var(--white);border-radius:var(--r);border:1px solid var(--border)}
-.ai-stage{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.ai-stage{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;border-radius:8px;padding:4px 2px;transition:transform .15s,background .15s;cursor:default}
+.ai-stage:hover{transform:translateY(-2px);background:var(--coral-light)}
 .ai-stage-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);white-space:nowrap}
 .ai-stage-icons{display:flex;gap:10px;align-items:center;justify-content:center}
-.ai-stage-arrow{color:var(--coral);opacity:.4;font-size:1.2rem;padding:0 6px;flex-shrink:0}
+.ai-stage-arrow{color:var(--coral);opacity:.4;font-size:1.2rem;padding:0 6px;flex-shrink:0;animation:arrow-pulse 1.8s ease-in-out infinite}
 .ai-bottom{display:grid;grid-template-columns:58fr 42fr;gap:16px;align-items:stretch}
 .ask-shruti{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px}
 .ask-shruti h3{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin:0}
@@ -278,6 +295,9 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .ai-workflow{flex-wrap:wrap;gap:10px 0;padding:14px}
   .ai-stage-arrow{display:none}
   .ai-bottom{grid-template-columns:1fr}
+  .ai-tagline{font-size:.9rem;margin-bottom:24px}
+  .ai-closing-main{font-size:1.6rem}
+  .ai-card-tag{display:none}
 }
 </style>
 </head>
@@ -473,6 +493,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   <h2 class="st">AI-native.<br/>Not AI-curious.</h2>
   <div class="ai-grid">
     <div class="reveal">
+      <p class="ai-tagline">I research with it. I prototype with it. <em class="ai-vibe-phrase">I vibe with it.</em></p>
       <p style="font-size:.86rem;color:var(--mid);margin-bottom:18px;line-height:1.7">Tools I use as part of my actual workflow — not experiments.</p>
       <div class="ai-workflow">
         <div class="ai-stage">
@@ -509,7 +530,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
       <div class="ai-bottom">
         <div class="ai-cards" id="aicards"></div>
         <div class="ask-shruti">
-          <h3>Ask Shruti</h3>
+          <div class="ask-shruti-header"><h3>Ask Shruti</h3><span class="ask-badge">Coming soon</span></div>
           <p class="ask-subtitle">An AI that knows my background — ask it anything about my experience</p>
           <div class="ask-messages"><p class="ask-placeholder">Ask me about my product experience,<br/>case studies, or working style.</p></div>
           <div class="ask-input-row">
@@ -517,6 +538,10 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
             <button disabled>Send</button>
           </div>
         </div>
+      </div>
+      <div class="ai-closing">
+        <p class="ai-closing-pre">Anyway, enough talking about AI.</p>
+        <p class="ai-closing-main">Go ask it something.<span class="ai-closing-arrow"> ↓</span></p>
       </div>
     </div>
   </div>
@@ -646,9 +671,9 @@ const AI_TOOLS=[
 ];
 
 const AI_CARDS=[
-  {num:"01",title:"AI-Assisted Discovery",text:"I use custom GPTs to accelerate market and competitive research, structure discovery frameworks, and prepare pre-sales thinking. AI speeds up the research cycle; I bring the product judgment, context, and prioritization."},
-  {num:"02",title:"Prototype Before You Decide",text:"I turn product ideas into clickable prototypes, demos, and lightweight internal tools so stakeholders can react to something tangible. It helps me test assumptions, surface gaps, and de-risk decisions before committing to delivery."},
-  {num:"03",eyebrow:"LESS &ldquo;WHAT IF?&rdquo; MORE &ldquo;LET ME SHOW YOU.&rdquo;",title:"Product Thinking, Made Tangible",text:"I built this portfolio using AI-assisted vibe coding—not to become a developer, but to turn product ideas into working experiences myself. It lets me explore, communicate, and iterate on concepts faster, while keeping the thinking firmly on the product side."}
+  {num:"01",tag:"RESEARCH → THINK",title:"AI-Assisted Discovery",text:"I use custom GPTs to accelerate market and competitive research, structure discovery frameworks, and prepare pre-sales thinking. AI speeds up the research cycle; I bring the product judgment, context, and prioritization."},
+  {num:"02",tag:"PROTOTYPE → TEST",title:"Prototype Before You Decide",text:"I turn product ideas into clickable prototypes, demos, and lightweight internal tools so stakeholders can react to something tangible. It helps me test assumptions, surface gaps, and de-risk decisions before committing to delivery."},
+  {num:"03",tag:"VIBE → MAKE",eyebrow:"YES, I VIBE.",title:"Product Thinking, Made Tangible",text:"I built this portfolio using AI-assisted vibe coding—not to become a developer, but to turn product ideas into working experiences myself. It lets me explore, communicate, and iterate on concepts faster, while keeping the thinking firmly on the product side.",playful:true}
 ];
 
 const ACH=[
@@ -715,7 +740,8 @@ if(window.matchMedia('(hover:none)').matches){
 // AI CARDS
 AI_CARDS.forEach(c=>{
   const eyebrow=c.eyebrow?`<div class="ai-card-eyebrow">${c.eyebrow}</div>`:'';
-  document.getElementById("aicards").innerHTML+=`<div class="ai-card"><div class="ai-card-num">${c.num}</div>${eyebrow}<h4>${c.title}</h4><p>${c.text}</p></div>`;
+  const cls='ai-card'+(c.playful?' ai-card--playful':'');
+  document.getElementById("aicards").innerHTML+=`<div class="${cls}"><div class="ai-card-top"><div class="ai-card-num">${c.num}</div><div class="ai-card-tag">${c.tag}</div></div>${eyebrow}<h4>${c.title}</h4><p>${c.text}</p></div>`;
 });
 
 // ACHIEVEMENTS
