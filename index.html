@@ -190,6 +190,20 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card:hover{border-color:var(--coral);transform:translateX(5px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
 .ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
+.ai-workflow{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:18px 20px;background:var(--white);border-radius:var(--r);border:1px solid var(--border)}
+.ai-stage{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.ai-stage-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);white-space:nowrap}
+.ai-stage-icons{display:flex;gap:10px;align-items:center;justify-content:center}
+.ai-stage-arrow{color:var(--coral);opacity:.4;font-size:1.2rem;padding:0 6px;flex-shrink:0}
+.ai-bottom{display:grid;grid-template-columns:58fr 42fr;gap:16px;align-items:stretch}
+.ask-shruti{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px}
+.ask-shruti h3{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin:0}
+.ask-subtitle{font-size:.8rem;color:var(--mid);line-height:1.6;margin:0}
+.ask-messages{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:110px}
+.ask-placeholder{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.7;margin:0}
+.ask-input-row{display:flex;gap:8px}
+.ask-input-row input{flex:1;padding:9px 14px;border-radius:100px;border:1px solid var(--border);font-size:.8rem;font-family:'Inter',sans-serif;background:var(--bg);color:var(--muted);cursor:not-allowed;outline:none}
+.ask-input-row button{padding:9px 16px;background:var(--bg);border:1px solid var(--border);border-radius:100px;font-size:.8rem;font-family:'Inter',sans-serif;color:var(--muted);cursor:not-allowed}
 .contact-fab-wrap{position:fixed;right:22px;bottom:22px;z-index:1100;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .contact-fab-toggle{width:58px;height:58px;border-radius:50%;border:none;background:var(--coral);color:white;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 12px 32px rgba(232,96,60,.25);transition:transform .2s,box-shadow .2s}
 .contact-fab-toggle:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,96,60,.32)}
@@ -259,6 +273,9 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .shoot-photo-stack{height:300px;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;overflow:hidden}
   .hero-blob.b2{display:none}
   #contact{padding:60px 22px} footer{padding:18px 22px}
+  .ai-workflow{flex-wrap:wrap;gap:10px 0;padding:14px}
+  .ai-stage-arrow{display:none}
+  .ai-bottom{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -455,8 +472,50 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   <div class="ai-grid">
     <div class="reveal">
       <p style="font-size:.86rem;color:var(--mid);margin-bottom:18px;line-height:1.7">Tools I use as part of my actual workflow — not experiments.</p>
-      <div class="ai-tools-row" id="aitools"></div>
-      <div class="ai-cards" id="aicards"></div>
+      <div class="ai-workflow">
+        <div class="ai-stage">
+          <div class="ai-stage-label">Research</div>
+          <div class="ai-stage-icons">
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="Claude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Claude</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="ChatGPT" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">ChatGPT</div></div>
+          </div>
+        </div>
+        <div class="ai-stage-arrow">›</div>
+        <div class="ai-stage">
+          <div class="ai-stage-label">Build</div>
+          <div class="ai-stage-icons">
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="Claude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Claude</div></div>
+          </div>
+        </div>
+        <div class="ai-stage-arrow">›</div>
+        <div class="ai-stage">
+          <div class="ai-stage-label">Ship</div>
+          <div class="ai-stage-icons">
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=atlassian.com&sz=64" alt="Jira" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Jira</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=notion.so&sz=64" alt="Notion" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Notion</div></div>
+          </div>
+        </div>
+        <div class="ai-stage-arrow">›</div>
+        <div class="ai-stage">
+          <div class="ai-stage-label">Validate</div>
+          <div class="ai-stage-icons">
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=amplitude.com&sz=64" alt="Amplitude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Amplitude</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=figma.com&sz=64" alt="Figma" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Figma</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-bottom">
+        <div class="ai-cards" id="aicards"></div>
+        <div class="ask-shruti">
+          <h3>Ask Shruti</h3>
+          <p class="ask-subtitle">An AI that knows my background — ask it anything about my experience</p>
+          <div class="ask-messages"><p class="ask-placeholder">Ask me about my product experience,<br/>case studies, or working style.</p></div>
+          <div class="ask-input-row">
+            <input type="text" placeholder="Ask something about Shruti…" disabled/>
+            <button disabled>Send</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -651,14 +710,6 @@ if(window.matchMedia('(hover:none)').matches){
   });
 }
 
-// AI TOOLS
-AI_TOOLS.forEach(t=>{
-  document.getElementById("aitools").innerHTML+=`<div class="ai-tool-item">
-    <img class="ai-tool-logo" src="${t.logo}" alt="${t.name}" onerror="this.style.opacity='.2'"/>
-    <div class="ai-tool-label">${t.name}</div>
-  </div>`;
-});
-
 // AI CARDS
 AI_CARDS.forEach(c=>{
   document.getElementById("aicards").innerHTML+=`<div class="ai-card"><h4>${c.icon} ${c.title}</h4><p>${c.text}</p></div>`;
@@ -694,8 +745,8 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
 const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
-let score=0,shots=0,gameOver=false,aim={x:16,y:16,vx:2.2,vy:1.35},rips=[];
-function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.x=16;aim.y=16;aim.vx=2.2;aim.vy=1.35;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
+let score=0,shots=0,gameOver=false,gt=0,aim={x:cv.width*.2,y:cv.height*.3,vx:2.2,vy:1.5},rips=[];
+function gameReset(){score=0;shots=0;gameOver=false;rips=[];gt=0;aim.vx=2.2;aim.vy=1.5;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
 function drawTarget(){
   ctx.fillStyle="#161613";ctx.fillRect(0,0,cv.width,cv.height);
   ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
@@ -717,7 +768,7 @@ function drawCrosshair(x,y){
 }
 (function gl(){
   drawTarget();
-  if(!gameOver){aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
+  if(!gameOver){gt++;if(gt%70===0){const dx=TX-aim.x,dy=TY-aim.y,d=Math.hypot(dx,dy);if(d>5){const s=Math.hypot(aim.vx,aim.vy);aim.vx=dx/d*s;aim.vy=dy/d*s;}}aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
   rips=rips.filter(r=>r.o>0);
   rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
   drawCrosshair(aim.x,aim.y);
