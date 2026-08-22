@@ -745,8 +745,8 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
 const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
-let score=0,shots=0,gameOver=false,gt=0,gspd=1,aim={x:cv.width*.2,y:cv.height*.3},rips=[];
-function gameReset(){score=0;shots=0;gameOver=false;rips=[];gt=0;gspd=1;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
+let score=0,shots=0,gameOver=false,aim={x:85,y:55,vx:2.2,vy:1.5},rips=[];
+function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.x=85;aim.y=55;aim.vx=2.2;aim.vy=1.5;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
 function drawTarget(){
   ctx.fillStyle="#161613";ctx.fillRect(0,0,cv.width,cv.height);
   ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
@@ -768,7 +768,7 @@ function drawCrosshair(x,y){
 }
 (function gl(){
   drawTarget();
-  if(!gameOver){gt++;const g=gt*gspd;aim.x=TX+35*Math.sin(g*.038)+20*Math.sin(g*.053+.9)+8*Math.sin(g*.091+2.3);aim.y=TY+28*Math.sin(g*.029+1.5)+18*Math.sin(g*.047+.4)+7*Math.sin(g*.073+3.1);}
+  if(!gameOver){aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
   rips=rips.filter(r=>r.o>0);
   rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
   drawCrosshair(aim.x,aim.y);
@@ -783,7 +783,7 @@ cv.addEventListener("click",()=>{
     score+=p;document.getElementById("sv").textContent=score;
     if(shots<5){document.getElementById("gm").textContent={10:"Bullseye! 🎯",9:"Outstanding! ✨",8:"Great shot!",7:"Good hit! 👍",5:"Hit!",3:"Outer zone",1:"Barely in"}[p];}
     rips.push({x:aim.x,y:aim.y,rad:5,o:.85});
-    if(shots<5){gspd=Math.min(gspd*1.15,2.5);}
+    if(shots<5){const sp=Math.hypot(aim.vx*=1.08,aim.vy*=1.08);if(sp>6.5){aim.vx=aim.vx/sp*6.5;aim.vy=aim.vy/sp*6.5;}}
   }else{
     if(shots<5)document.getElementById("gm").textContent="Missed! Steady your aim 🫁";
   }
