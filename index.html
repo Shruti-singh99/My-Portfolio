@@ -745,8 +745,8 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
 const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
-let score=0,shots=0,gameOver=false,aim={x:85,y:55,vx:2.2,vy:1.5},rips=[];
-function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.x=85;aim.y=55;aim.vx=2.2;aim.vy=1.5;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
+let score=0,shots=0,gameOver=false,aim={x:103,y:43,vx:1.7,vy:2.08},rips=[];
+function gameReset(){score=0;shots=0;gameOver=false;rips=[];aim.x=103;aim.y=43;aim.vx=1.7;aim.vy=2.08;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
 function drawTarget(){
   ctx.fillStyle="#161613";ctx.fillRect(0,0,cv.width,cv.height);
   ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
