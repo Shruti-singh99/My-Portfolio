@@ -476,31 +476,31 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
         <div class="ai-stage">
           <div class="ai-stage-label">Research</div>
           <div class="ai-stage-icons">
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="Claude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Claude</div></div>
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="ChatGPT" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">ChatGPT</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/anthropic" alt="Claude" onerror="this.src='https://www.google.com/s2/favicons?domain=anthropic.com&sz=64'"/><div class="ai-tool-label">Claude</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/openai" alt="ChatGPT" onerror="this.src='https://www.google.com/s2/favicons?domain=openai.com&sz=64'"/><div class="ai-tool-label">ChatGPT</div></div>
           </div>
         </div>
         <div class="ai-stage-arrow">›</div>
         <div class="ai-stage">
           <div class="ai-stage-label">Build</div>
           <div class="ai-stage-icons">
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="Claude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Claude</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/anthropic" alt="Claude" onerror="this.src='https://www.google.com/s2/favicons?domain=anthropic.com&sz=64'"/><div class="ai-tool-label">Claude</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/figma" alt="Figma" onerror="this.src='https://www.google.com/s2/favicons?domain=figma.com&sz=64'"/><div class="ai-tool-label">Figma</div></div>
           </div>
         </div>
         <div class="ai-stage-arrow">›</div>
         <div class="ai-stage">
           <div class="ai-stage-label">Ship</div>
           <div class="ai-stage-icons">
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=atlassian.com&sz=64" alt="Jira" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Jira</div></div>
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=notion.so&sz=64" alt="Notion" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Notion</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/jira/0052CC" alt="Jira" onerror="this.src='https://www.google.com/s2/favicons?domain=atlassian.com&sz=64'"/><div class="ai-tool-label">Jira</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/confluence/172B4D" alt="Confluence" onerror="this.src='https://www.google.com/s2/favicons?domain=confluence.atlassian.com&sz=64'"/><div class="ai-tool-label">Confluence</div></div>
           </div>
         </div>
         <div class="ai-stage-arrow">›</div>
         <div class="ai-stage">
           <div class="ai-stage-label">Validate</div>
           <div class="ai-stage-icons">
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=amplitude.com&sz=64" alt="Amplitude" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Amplitude</div></div>
-            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://www.google.com/s2/favicons?domain=figma.com&sz=64" alt="Figma" onerror="this.style.opacity='.2'"/><div class="ai-tool-label">Figma</div></div>
+            <div class="ai-tool-item"><img class="ai-tool-logo" src="https://cdn.simpleicons.org/amplitude" alt="Amplitude" onerror="this.src='https://www.google.com/s2/favicons?domain=amplitude.com&sz=64'"/><div class="ai-tool-label">Amplitude</div></div>
           </div>
         </div>
       </div>
@@ -645,7 +645,7 @@ const AI_TOOLS=[
 
 const AI_CARDS=[
   {icon:"⚡",title:"AI is part of how I work, not what I experiment with",text:"Custom GPTs are how I run competitive research, draft discovery frameworks, and prep pre-sales decks. What used to take days takes hours. The thinking is mine — the legwork isn't."},
-  {icon:"🔨",title:"Vibe coding — including this portfolio",text:"I describe what I want, iterate in real time, and ship. This entire portfolio was built that way. It's a different kind of product skill — and one I use regularly for side projects and prototypes."},
+  {icon:"🛠️",title:"Vibe coding to move product work faster",text:"I use AI to turn ideas into clickable prototypes and working demos — not the delivery itself, but the product thinking made tangible. It's how a 'what if we tried this' becomes something stakeholders can actually see and react to, without waiting on a dev cycle."},
   {icon:"🎮",title:"Side projects",text:"Built a browser-based racing game with obstacles and turbo boost using only natural language prompts. The output is real, functional code — I just skipped the part where I had to know syntax."}
 ];
 
@@ -745,8 +745,8 @@ document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
 // GAME
 const cv=document.getElementById("tgt"),ctx=cv.getContext("2d");
 const TX=cv.width/2,TY=cv.height/2,TR=Math.min(cv.width,cv.height)*0.44;
-let score=0,shots=0,gameOver=false,gt=0,aim={x:cv.width*.2,y:cv.height*.3,vx:2.2,vy:1.5},rips=[];
-function gameReset(){score=0;shots=0;gameOver=false;rips=[];gt=0;aim.vx=2.2;aim.vy=1.5;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
+let score=0,shots=0,gameOver=false,gt=0,gspd=1,aim={x:cv.width*.2,y:cv.height*.3},rips=[];
+function gameReset(){score=0;shots=0;gameOver=false;rips=[];gt=0;gspd=1;document.getElementById("sv").textContent=0;document.getElementById("sh").textContent=0;document.getElementById("gm").textContent="Click when the crosshair lines up!";}
 function drawTarget(){
   ctx.fillStyle="#161613";ctx.fillRect(0,0,cv.width,cv.height);
   ctx.beginPath();ctx.arc(TX,TY,TR,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
@@ -768,7 +768,7 @@ function drawCrosshair(x,y){
 }
 (function gl(){
   drawTarget();
-  if(!gameOver){gt++;if(gt%70===0){const dx=TX-aim.x,dy=TY-aim.y,d=Math.hypot(dx,dy);if(d>5){const s=Math.hypot(aim.vx,aim.vy);aim.vx=dx/d*s;aim.vy=dy/d*s;}}aim.x+=aim.vx;aim.y+=aim.vy;if(aim.x<16||aim.x>cv.width-16)aim.vx*=-1;if(aim.y<16||aim.y>cv.height-16)aim.vy*=-1;}
+  if(!gameOver){gt++;aim.x=TX+75*Math.sin(gt*.038*gspd)+35*Math.sin(gt*.027*gspd);aim.y=TY+52*Math.sin(gt*.029*gspd+1.2)+28*Math.sin(gt*.019*gspd+.6);}
   rips=rips.filter(r=>r.o>0);
   rips.forEach(r=>{ctx.beginPath();ctx.arc(r.x,r.y,r.rad,0,Math.PI*2);ctx.strokeStyle=`rgba(232,96,60,${r.o})`;ctx.lineWidth=2;ctx.stroke();r.rad+=3;r.o-=.055;});
   drawCrosshair(aim.x,aim.y);
@@ -783,7 +783,7 @@ cv.addEventListener("click",()=>{
     score+=p;document.getElementById("sv").textContent=score;
     if(shots<5){document.getElementById("gm").textContent={10:"Bullseye! 🎯",9:"Outstanding! ✨",8:"Great shot!",7:"Good hit! 👍",5:"Hit!",3:"Outer zone",1:"Barely in"}[p];}
     rips.push({x:aim.x,y:aim.y,rad:5,o:.85});
-    if(shots<5){const sp=Math.hypot(aim.vx*=1.08,aim.vy*=1.08);if(sp>6.5){aim.vx=aim.vx/sp*6.5;aim.vy=aim.vy/sp*6.5;}}
+    if(shots<5){gspd=Math.min(gspd*1.15,2.5);}
   }else{
     if(shots<5)document.getElementById("gm").textContent="Missed! Steady your aim 🫁";
   }
