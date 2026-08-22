@@ -190,6 +190,8 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card:hover{border-color:var(--coral);transform:translateX(5px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
 .ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
+.ai-card-num{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);opacity:.65;margin-bottom:4px}
+.ai-card-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;line-height:1.4}
 .ai-workflow{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:18px 20px;background:var(--white);border-radius:var(--r);border:1px solid var(--border)}
 .ai-stage{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
 .ai-stage-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);white-space:nowrap}
@@ -644,9 +646,9 @@ const AI_TOOLS=[
 ];
 
 const AI_CARDS=[
-  {icon:"⚡",title:"AI is part of how I work, not what I experiment with",text:"Custom GPTs are how I run competitive research, draft discovery frameworks, and prep pre-sales decks. What used to take days takes hours. The thinking is mine — the legwork isn't."},
-  {icon:"🛠️",title:"Vibe coding to move product work faster",text:"I use AI to turn ideas into clickable prototypes and working demos — not the delivery itself, but the product thinking made tangible. It's how a 'what if we tried this' becomes something stakeholders can actually see and react to, without waiting on a dev cycle."},
-  {icon:"🎮",title:"Side projects",text:"Built a browser-based racing game with obstacles and turbo boost using only natural language prompts. The output is real, functional code — I just skipped the part where I had to know syntax."}
+  {num:"01",title:"AI-Assisted Discovery",text:"I use custom GPTs to accelerate market and competitive research, structure discovery frameworks, and prepare pre-sales thinking. AI speeds up the research cycle; I bring the product judgment, context, and prioritization."},
+  {num:"02",title:"Prototype Before You Decide",text:"I turn product ideas into clickable prototypes, demos, and lightweight internal tools so stakeholders can react to something tangible. It helps me test assumptions, surface gaps, and de-risk decisions before committing to delivery."},
+  {num:"03",eyebrow:"LESS &ldquo;WHAT IF?&rdquo; MORE &ldquo;LET ME SHOW YOU.&rdquo;",title:"Product Thinking, Made Tangible",text:"I built this portfolio using AI-assisted vibe coding—not to become a developer, but to turn product ideas into working experiences myself. It lets me explore, communicate, and iterate on concepts faster, while keeping the thinking firmly on the product side."}
 ];
 
 const ACH=[
@@ -712,7 +714,8 @@ if(window.matchMedia('(hover:none)').matches){
 
 // AI CARDS
 AI_CARDS.forEach(c=>{
-  document.getElementById("aicards").innerHTML+=`<div class="ai-card"><h4>${c.icon} ${c.title}</h4><p>${c.text}</p></div>`;
+  const eyebrow=c.eyebrow?`<div class="ai-card-eyebrow">${c.eyebrow}</div>`:'';
+  document.getElementById("aicards").innerHTML+=`<div class="ai-card"><div class="ai-card-num">${c.num}</div>${eyebrow}<h4>${c.title}</h4><p>${c.text}</p></div>`;
 });
 
 // ACHIEVEMENTS
