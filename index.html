@@ -54,6 +54,59 @@ body{font-family:'Inter',sans-serif;background:var(--white);color:var(--ink);cur
 #cd{display:none}
 #cr.big{width:52px;height:52px;opacity:.5}
 
+
+/* SELECTED WORK — bento grid */
+#work{background:var(--white)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.wc-wide{grid-column:span 2}
+.work-card{position:relative;overflow:hidden;border-radius:22px;padding:26px 28px;border:1px solid var(--border);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.work-card:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 18px 40px rgba(232,96,60,.16)}
+.work-card::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-70px;top:-90px;background:currentColor;opacity:.06;pointer-events:none}
+.wc-light{background:var(--bg)}
+.wc-soft{background:var(--coral-light);border-color:var(--coral-mid)}
+.wc-coral{background:var(--coral);border-color:var(--coral);color:#fff}
+.wc-ink{background:#1A1A2E;border-color:#1A1A2E;color:#fff}
+:root[data-theme="dark"] .wc-ink{background:#0B0B0E;border-color:#2B2B32}
+.work-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.work-tag{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);background:var(--white);padding:4px 10px;border-radius:100px}
+.wc-light .work-tag{background:var(--coral-light)}
+.wc-coral .work-tag{background:rgba(255,255,255,.2);color:#fff}
+.wc-ink .work-tag{background:rgba(232,96,60,.2);color:#F4A58A}
+.work-org{font-size:.72rem;color:var(--muted);font-weight:500}
+.wc-coral .work-org,.wc-ink .work-org{color:rgba(255,255,255,.7)}
+.work-stat{font-family:'Outfit',sans-serif;font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--coral)}
+.work-stat small{font-size:.45em;font-weight:600;opacity:.8}
+.work-arrow{display:inline-block;transition:transform .3s}
+.work-card:hover .work-arrow{transform:translateX(6px)}
+.wc-coral .work-stat{color:#fff}
+.wc-ink .work-stat{color:#fff}
+.work-stat-lbl{font-size:.78rem;font-weight:500;color:var(--mid);margin:8px 0 18px;max-width:340px}
+.wc-coral .work-stat-lbl,.wc-ink .work-stat-lbl{color:rgba(255,255,255,.82)}
+.work-card h3{font-family:'Outfit',sans-serif;font-size:1.08rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+.wc-coral h3,.wc-ink h3{color:#fff}
+.work-steps{display:flex;flex-direction:column;gap:6px;margin-top:auto}
+.work-steps p{font-size:.78rem;color:var(--mid);line-height:1.55;display:grid;grid-template-columns:78px 1fr;gap:10px}
+.wc-coral .work-steps p,.wc-ink .work-steps p{color:rgba(255,255,255,.85)}
+.work-steps b{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.wc-coral .work-steps b,.wc-ink .work-steps b{color:rgba(255,255,255,.6)}
+.work-win{color:var(--ink);font-weight:600}
+.wc-coral .work-win,.wc-ink .work-win{color:#fff}
+@media(max-width:900px){.work-grid{grid-template-columns:1fr 1fr}.wc-wide{grid-column:span 2}}
+.work-more{display:none}
+@media(max-width:640px){
+  .work-grid{grid-template-columns:1fr;gap:12px}.wc-wide{grid-column:auto}
+  .work-card{padding:20px}.work-card:hover{transform:none}
+  .work-top{margin-bottom:12px}.work-stat{font-size:2.4rem}.work-stat-lbl{margin:6px 0 12px}.work-card h3{margin-bottom:4px}
+  .work-steps p{grid-template-columns:1fr;gap:1px}
+  /* collapsed by default on phones — tap to open */
+  .work-more{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:10px;padding:6px 12px;border-radius:100px;border:1px solid currentColor;background:none;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;color:var(--coral);cursor:pointer}
+  .wc-coral .work-more,.wc-ink .work-more{color:#fff}
+  .work-more span{display:inline-block;transition:transform .3s}
+  .work-card.open .work-more span{transform:rotate(180deg)}
+  .work-steps{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .4s ease,opacity .3s,margin-top .3s}
+  .work-card.open .work-steps{max-height:420px;opacity:1;margin-top:14px}
+}
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 60px;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
 nav.scrolled{border-color:var(--border)}
@@ -147,7 +200,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .tl-body li{font-size:.84rem;color:var(--mid);line-height:1.78;margin-bottom:6px}
 
 /* SKILLS */
-#skills{background:var(--white)}
+#skills{background:var(--bg)}
 .career-tl{margin-bottom:44px}
 .career-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);padding-top:12px;padding-bottom:0;margin-bottom:12px}
 .career-track::before{content:'';position:absolute;top:43px;left:12.5%;right:12.5%;height:2px;background:var(--coral-mid);transform:translateY(-50%);pointer-events:none}
@@ -287,24 +340,9 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .chat-fab.hide,.contact-fab-wrap.open ~ .chat-fab{opacity:0;transform:translateY(10px);pointer-events:none}
 
 /* BEYOND */
-#beyond{background:var(--white)}
-.beyond-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.ngo-quote{position:relative;padding:26px 26px 26px 38px;background:var(--coral-light);border-radius:var(--r-lg);border-left:4px solid var(--coral);margin-bottom:22px}
-.ngo-quote::before{content:'"';position:absolute;left:12px;top:8px;font-family:'Outfit',sans-serif;font-size:2.8rem;color:var(--coral);line-height:1;opacity:.3}
-.ngo-quote p{font-size:.92rem;line-height:1.78;color:var(--ink);font-style:italic}
-.ngo-text p{font-size:.88rem;line-height:1.85;color:var(--mid);margin-bottom:12px}
-.ngo-text p strong{color:var(--ink);font-weight:600}
-.beyond-cards{display:flex;flex-direction:column;gap:16px}
-.beyond-card{background:var(--bg);border-radius:var(--r);padding:20px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
-.beyond-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(232,96,60,.1)}
-.beyond-card h4{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:7px;color:var(--ink)}
-.beyond-card p{font-size:.84rem;color:var(--mid);line-height:1.65}
-.travel-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.travel-pill{padding:5px 13px;background:var(--white);border:1px solid var(--border);border-radius:100px;font-size:.76rem;color:var(--mid);transition:all .2s;cursor:default}
-.travel-pill:hover{background:var(--coral);color:white;border-color:var(--coral)}
 
 /* ACHIEVEMENTS */
-#achievements{background:var(--bg)}
+#achievements{background:var(--white)}
 .ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
 .ach-card{background:var(--white);border-radius:var(--r);padding:18px;border:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;transition:transform .2s,box-shadow .2s}
 .ach-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(232,96,60,.1)}
@@ -363,11 +401,11 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
     <li><a href="#about">About</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#shooting">Shooting</a></li>
     <li><a href="#books">Books</a></li>
     <li><a href="#ai">AI & Vibe</a></li>
-    <li><a href="#beyond">Beyond Work</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Dark mode">
@@ -410,7 +448,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
     <div class="about-text reveal">
       <h2 class="st">Trained in marketing.<br/>Practised in product.</h2>
       <p>I started in business development, moved through market research and GTM strategy, and into product — where <strong>marketing and product finally clicked together</strong>. Understanding users isn't something I do for work. <em style="color: #E8603C;">It's how I think.</em></p>
-      <p>At Altimetrik, I own the product roadmap for a global logistics intelligence platform — translating messy client needs into clean, scalable solutions. Outside of work, I'm building things with AI, reading slowly and deliberately, and exploring cities on foot like a local.</p>
+      <p>At Altimetrik, I own the product roadmap for a global logistics intelligence platform — translating messy client needs into clean, scalable solutions. Outside of work, I'm building things with AI, reading slowly and deliberately, and exploring cities on foot like a local. Friends also bring me their business ideas — helping them with positioning and GTM is my idea of fun.</p>
     </div>
     <div class="about-sidebar reveal">
       <p class="about-quote">Numbers tell you what happened. People tell you why. I chase both.</p>
@@ -476,6 +514,61 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   </div>
   <p class="section-intro reveal">From building client relationships at The CSR Journal to owning a global product roadmap at Altimetrik — every role sharpened a different edge.</p>
   <div class="timeline reveal" id="tl"></div>
+</section>
+
+<!-- SELECTED WORK -->
+<section id="work">
+  <div class="label">Selected work</div>
+  <h2 class="st">Less telling.<br/>More showing.</h2>
+  <p class="section-intro reveal">Four moments that shaped how I work, from a rickshaw full of posters to a product roadmap.</p>
+  <div class="work-grid reveal">
+    <article class="work-card wc-coral wc-wide">
+      <div class="work-top"><span class="work-tag">Campaign · Social impact</span><span class="work-org">Yuva Parivartan · 2019</span></div>
+      <div class="work-stat">1 <small>of</small> 8.5 lakh</div>
+      <div class="work-stat-lbl">students. This one started with my poster.</div>
+      <h3>My first campaign 📣</h3>
+      <button class="work-more" type="button" aria-expanded="false">The story <span>▾</span></button>
+      <div class="work-steps">
+        <p><b>The ask</b>Get young people in Mumbai's slums to sign up for job training.</p>
+        <p><b>What I did</b>Posters, articles, social media, and a rickshaw ride through Kerwadi with a mic in hand.</p>
+        <p><b>Result</b><span class="work-win">A woman saw my poster, walked in, and enrolled. That's when I learned what impact feels like.</span></p>
+      </div>
+    </article>
+    <article class="work-card wc-light">
+      <div class="work-top"><span class="work-tag">Marketing · Distribution</span><span class="work-org">Emami · 2024</span></div>
+      <div class="work-stat">100+</div>
+      <div class="work-stat-lbl">retailers, wholesalers and distributors heard</div>
+      <h3>More reach, zero extra spend 📦</h3>
+      <button class="work-more" type="button" aria-expanded="false">The story <span>▾</span></button>
+      <div class="work-steps">
+        <p><b>The ask</b>Get products deeper into rural West Bengal.</p>
+        <p><b>What I did</b>Turned field conversations into a data-led pilot for rural channels.</p>
+        <p><b>Result</b><span class="work-win">99% of EDWB target with a team of 6, at no added cost.</span></p>
+      </div>
+    </article>
+    <article class="work-card wc-ink">
+      <div class="work-top"><span class="work-tag">BD · Partnerships</span><span class="work-org">The CSR Journal · 2021–22</span></div>
+      <div class="work-stat">🏆</div>
+      <div class="work-stat-lbl">Young Achiever Award, 2021</div>
+      <h3>Selling a cause, pan-India 🤝</h3>
+      <button class="work-more" type="button" aria-expanded="false">The story <span>▾</span></button>
+      <div class="work-steps">
+        <p><b>The ask</b>Grow partners for a CSR magazine and its national awards.</p>
+        <p><b>What I did</b>Ran the pipeline end to end with CSR teams, NGOs and government bodies, plus the digital campaigns.</p>
+      </div>
+    </article>
+    <article class="work-card wc-soft wc-wide">
+      <div class="work-top"><span class="work-tag">Product</span><span class="work-org">Altimetrik · 2025–now</span></div>
+      <div class="work-stat">Team <small>of</small> 10</div>
+      <div class="work-stat-lbl">that I lead as Product Owner, with zero product background going in</div>
+      <h3>From client chaos to a clear roadmap 🗺️</h3>
+      <button class="work-more" type="button" aria-expanded="false">The story <span>▾</span></button>
+      <div class="work-steps">
+        <p><b>The ask</b>Turn a global pharma client's scattered needs into one predictive insights platform.</p>
+        <p><b>What I did</b>Led discovery, prioritised the backlog, and planned each Program Increment.</p>
+      </div>
+    </article>
+  </div>
 </section>
 
 <!-- SKILLS -->
@@ -613,40 +706,6 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
           <p class="ask-note">AI-generated answers can be wrong. For anything important, email Shruti.</p>
         </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BEYOND -->
-<section id="beyond">
-  <div class="label">Beyond work</div>
-  <h2 class="st">What makes me, me.</h2>
-  <div class="beyond-grid">
-    <div class="beyond-left reveal">
-      <div class="ngo-quote">
-        <p>A lady was staring at a poster I had made. She turned and asked, "Ye sab course seekhate hain kya idhar?" — and then she became 1 of 8.5 lakh students of Yuva Parivartan.</p>
-      </div>
-      <div class="ngo-text">
-        <p><strong>YES Foundation Fellowship, 2019.</strong> I joined Yuva Parivartan, an NGO fighting youth unemployment through vocational training. On day two, I sat in a rickshaw wrapped in posters, mic in hand, driving through the slums of Kerwadi in Mumbai.</p>
-        <p>I spoke to mothers crying for their children who couldn't find jobs despite having degrees. Over two months I wrote articles, made posters, handled social media — small contributions. But the day that poster brought someone through the door, I understood what <strong>real impact feels like</strong>. It's what I chase in every product decision today.</p>
-      </div>
-    </div>
-    <div class="beyond-cards reveal">
-      <div class="beyond-card">
-        <h4>🚶 I travel like a local</h4>
-        <p>No tourist checklists. I explore cities on foot, eat where the locals eat, and understand places through their people — the same curiosity that makes me good at understanding users.</p>
-        <div class="travel-pills">
-          <span class="travel-pill">On-foot explorer</span>
-          <span class="travel-pill">Street food over restaurants</span>
-          <span class="travel-pill">No itinerary</span>
-          <span class="travel-pill">Local transport only</span>
-          <span class="travel-pill">People over monuments</span>
-        </div>
-      </div>
-      <div class="beyond-card">
-        <h4>🤝 Informal product advisor</h4>
-        <p>Friends and family bring me their business ideas and I help them think through product positioning, user research, and GTM. It's what I do for fun — and it sharpens my instincts every time.</p>
       </div>
     </div>
   </div>
@@ -949,6 +1008,16 @@ cv.addEventListener("click",()=>{
     if(shots<5)document.getElementById("gm").textContent="Missed! Steady your aim 🫁";
   }
   if(shots>=5){gameOver=true;document.getElementById("gm").textContent=`Final score: ${score} / 50`;}
+});
+
+// SELECTED WORK — on phones, cards open and close when tapped
+document.querySelectorAll(".work-card").forEach(card=>{
+  const btn=card.querySelector(".work-more");
+  card.addEventListener("click",e=>{
+    if(!window.matchMedia("(max-width:640px)").matches||e.target.closest("a"))return;
+    const open=card.classList.toggle("open");
+    if(btn){btn.setAttribute("aria-expanded",String(open));btn.firstChild.textContent=open?"Less ":"The story ";}
+  });
 });
 
 // FLOATING "ASK ALLY" BUTTON — jumps to the chat; hides while the chat is on screen
