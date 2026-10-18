@@ -57,7 +57,7 @@ EXPERIENCE
 - Led a team of 6 medical representatives to 78% of the sub-distributor target and 99% of the EDWB target.
 
 4. YES Foundation — YES Fellow with Yuva Parivartan (Apr – Jun 2019, Mumbai)
-- Worked with an NGO fighting youth unemployment through vocational training: community drives in Mumbai slums (including Kerwadi), posters, articles and social media, and career fairs linking job seekers with employers.
+- Worked with an NGO fighting youth unemployment through vocational training. Her brief was to campaign for a job fair in Mumbai's slums (including Kerwadi): posters, articles, social media, community drives — even a rickshaw ride with a mic. The fair drew people in, and many went on to join the courses.
 - Story she loves: a woman saw a poster Shruti made, asked whether they taught these courses, and enrolled — one of 8.5 lakh Yuva Parivartan students. That moment taught her what real impact feels like.
 
 SKILLS
