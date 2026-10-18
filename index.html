@@ -216,7 +216,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card{background:var(--white);border-radius:var(--r);padding:16px 18px;border:1px solid var(--border);transition:border-color .2s,transform .2s}
 .ai-card:hover{border-color:var(--coral);transform:translateY(-3px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
-.ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
+.ai-card p{font-size:.78rem;color:var(--mid);line-height:1.6}
 .ai-card-num{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);opacity:.65;margin-bottom:0}
 .ai-card-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;line-height:1.4}
 #ai h2.st{margin-bottom:14px}
@@ -735,9 +735,9 @@ const AI_TOOLS=[
 ];
 
 const AI_CARDS=[
-  {num:"01",tag:"RESEARCH → THINK",title:"AI-Assisted Discovery",text:"I use custom GPTs to accelerate market and competitive research, synthesise customer insights, and sharpen GTM and pre-sales thinking. AI speeds up the research cycle; I bring the judgment, context, and prioritisation."},
-  {num:"02",tag:"PROTOTYPE → TEST",title:"Prototype Before You Decide",text:"I turn product ideas into clickable prototypes, demos, and lightweight internal tools so stakeholders can react to something tangible. It helps me test assumptions, surface gaps, and de-risk decisions before committing to delivery."},
-  {num:"03",tag:"VIBE → MAKE",eyebrow:"YES, I VIBE.",title:"Product Thinking, Made Tangible",text:"I built this portfolio using AI-assisted vibe coding—not to become a developer, but to turn product ideas into working experiences myself. It lets me explore, communicate, and iterate on concepts faster, while keeping the thinking firmly on the customer and product side.",playful:true}
+  {num:"01",tag:"RESEARCH → THINK",title:"AI-Assisted Discovery",text:"Custom GPTs do the digging 🔍 I do the thinking. Faster research, sharper calls."},
+  {num:"02",tag:"PROTOTYPE → TEST",title:"Prototype Before You Decide",text:"Why debate a doc when you can click a demo? 🖱️ I build it, we poke holes in it, then we commit."},
+  {num:"03",tag:"VIBE → MAKE",eyebrow:"YES, I VIBE.",title:"Product Thinking, Made Tangible",text:"This whole site? Vibe-coded by me ✨ Not to become a developer, just to turn ideas into things you can click.",playful:true}
 ];
 
 const ACH=[
@@ -761,7 +761,7 @@ const ACH=[
   // Escape the reply, strip stray markdown, then turn emails and LinkedIn into links
   const linkify=t=>esc(t.replace(/\*\*(.+?)\*\*/g,"$1"))
     .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g,m=>`<a href="mailto:${m}">${m}</a>`)
-    .replace(/(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?/g,m=>`<a href="https://www.linkedin.com/in/shruti-singh-26b752186" target="_blank" rel="noopener">LinkedIn</a>`);
+    .replace(/(?:LinkedIn\s*(?:at|:)\s*)?(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?/gi,m=>`<a href="https://www.linkedin.com/in/shruti-singh-26b752186" target="_blank" rel="noopener">LinkedIn</a>`);
   const add=(role,text)=>{const d=document.createElement("div");d.className="ask-msg "+role;if(role==="bot")d.innerHTML=linkify(text);else d.textContent=text;box.appendChild(d);box.scrollTop=box.scrollHeight;return d;};
   async function ask(q){
     q=q.trim().slice(0,500); if(!q||busy)return;
