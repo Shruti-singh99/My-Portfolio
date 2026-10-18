@@ -268,8 +268,8 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ask-input-row input:focus{border-color:var(--coral)}
 .ask-input-row button{padding:9px 16px;background:var(--coral);border:1px solid var(--coral);border-radius:100px;font-size:.8rem;font-weight:500;font-family:'Inter',sans-serif;color:#fff;cursor:pointer;transition:opacity .2s}
 .ask-input-row button:disabled{opacity:.5;cursor:default}
-.contact-fab-wrap{position:fixed;right:22px;bottom:22px;z-index:1100;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.contact-fab-toggle{width:58px;height:58px;border-radius:50%;border:none;background:var(--coral);color:white;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 12px 32px rgba(232,96,60,.25);transition:transform .2s,box-shadow .2s}
+.contact-fab-wrap{position:fixed;right:22px;bottom:22px;z-index:1100;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.contact-fab-toggle{pointer-events:auto;width:58px;height:58px;border-radius:50%;border:none;background:var(--coral);color:white;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 12px 32px rgba(232,96,60,.25);transition:transform .2s,box-shadow .2s}
 .contact-fab-toggle:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,96,60,.32)}
 .contact-fab-menu{display:flex;flex-direction:column;gap:10px;align-items:flex-end;opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
 .contact-fab-wrap.open .contact-fab-menu{opacity:1;transform:none;pointer-events:auto}
@@ -278,6 +278,13 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .contact-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;}
 .contact-icon svg{width:18px;height:18px;display:block;}
 .contact-fab-label{font-size:.8rem;font-weight:600}
+/* Floating "Ask Ally" button — sits above the email button */
+.chat-fab{position:fixed;right:22px;bottom:92px;z-index:1099;display:flex;align-items:center;gap:10px;background:none;border:none;padding:0;cursor:pointer;transition:opacity .25s,transform .25s}
+.chat-fab-icon{width:58px;height:58px;box-sizing:border-box;border-radius:50%;background:var(--white);color:var(--coral);border:1.5px solid var(--coral);display:grid;place-items:center;box-shadow:0 10px 26px rgba(232,96,60,.2);transition:transform .2s,background .2s,color .2s}
+.chat-fab:hover .chat-fab-icon{transform:translateY(-2px);background:var(--coral);color:#fff}
+.chat-fab-label{font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;color:var(--coral);background:var(--white);border:1px solid var(--coral-mid);border-radius:100px;padding:6px 12px;box-shadow:0 6px 18px rgba(232,96,60,.12);opacity:0;transform:translateX(6px);transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+.chat-fab:hover .chat-fab-label,.chat-fab:focus-visible .chat-fab-label{opacity:1;transform:none}
+.chat-fab.hide,.contact-fab-wrap.open ~ .chat-fab{opacity:0;transform:translateY(10px);pointer-events:none}
 
 /* BEYOND */
 #beyond{background:var(--white)}
@@ -678,6 +685,10 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   </div>
   <button class="contact-fab-toggle" id="contact-fab-toggle" type="button" aria-label="Open contact options" aria-expanded="false">✉️</button>
 </div>
+<button class="chat-fab" id="chatFab" type="button" aria-label="Chat with Ally, my AI chatbot friend">
+  <span class="chat-fab-label">Ask Ally</span>
+  <span class="chat-fab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.5L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><circle cx="8.5" cy="12" r=".6" fill="currentColor"/><circle cx="12" cy="12" r=".6" fill="currentColor"/><circle cx="15.5" cy="12" r=".6" fill="currentColor"/></svg></span>
+</button>
 
 <script>
 const EXP=[
@@ -939,6 +950,17 @@ cv.addEventListener("click",()=>{
   }
   if(shots>=5){gameOver=true;document.getElementById("gm").textContent=`Final score: ${score} / 50`;}
 });
+
+// FLOATING "ASK ALLY" BUTTON — jumps to the chat; hides while the chat is on screen
+(function(){
+  const fab=document.getElementById("chatFab"),chat=document.querySelector(".ask-shruti"),inp=document.getElementById("askInput");
+  if(!fab||!chat)return;
+  fab.addEventListener("click",()=>{
+    chat.scrollIntoView({behavior:"smooth",block:"center"});
+    setTimeout(()=>inp&&inp.focus({preventScroll:true}),700);
+  });
+  new IntersectionObserver(es=>es.forEach(e=>fab.classList.toggle("hide",e.isIntersecting)),{threshold:.35}).observe(chat);
+})();
 
 const fabWrap=document.getElementById("contact-fab-wrap"),fabToggle=document.getElementById("contact-fab-toggle"),fabMenu=document.getElementById("contact-fab-menu");
 if(fabWrap&&fabToggle&&fabMenu){
