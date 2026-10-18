@@ -280,7 +280,8 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:20px 15px}
 .book-card{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
 .book-inner{position:relative;width:100%;height:225px;transform-style:preserve-3d;transition:transform .5s}
-.book-card:hover .book-inner,.book-card.flipped .book-inner{transform:rotateY(180deg)}
+.book-card.flipped .book-inner{transform:rotateY(180deg)}
+@media(hover:hover) and (pointer:fine){.book-card:hover .book-inner{transform:rotateY(180deg)}}
 .book-front,.book-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);overflow:hidden}
 .book-front{background:var(--white)}
 .book-cover-img{width:100%;height:100%;object-fit:cover;display:block}
@@ -1020,7 +1021,7 @@ BOOKS.forEach(b=>{
 });
 
 // Tap-to-flip for touch devices (hover doesn't work on mobile)
-if(window.matchMedia('(hover:none)').matches){
+if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   document.querySelectorAll('.book-card').forEach(card=>{
     card.addEventListener('click',()=>{
       const wasFlipped=card.classList.contains('flipped');
