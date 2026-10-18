@@ -212,9 +212,9 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-tool-item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .ai-tool-logo{width:38px;height:38px;border-radius:10px;object-fit:contain;background:var(--white);border:1px solid var(--border);padding:6px}
 .ai-tool-label{font-size:.67rem;color:var(--muted);font-weight:500}
-.ai-cards{display:flex;flex-direction:column;gap:11px}
+.ai-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .ai-card{background:var(--white);border-radius:var(--r);padding:16px 18px;border:1px solid var(--border);transition:border-color .2s,transform .2s}
-.ai-card:hover{border-color:var(--coral);transform:translateX(5px)}
+.ai-card:hover{border-color:var(--coral);transform:translateY(-3px)}
 .ai-card h4{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
 .ai-card p{font-size:.82rem;color:var(--mid);line-height:1.65}
 .ai-card-num{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);opacity:.65;margin-bottom:0}
@@ -229,11 +229,11 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-card--playful:hover{background:var(--coral-light)}
 .ask-shruti-header{display:flex;align-items:center;gap:9px}
 .ask-badge{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--coral-light);color:var(--coral);padding:3px 9px;border-radius:100px;border:1px solid rgba(232,96,60,.22);flex-shrink:0}
-.ask-col{display:flex;flex-direction:column;gap:14px}
-.ask-col .ask-shruti{flex:1}
-.ai-closing{text-align:center;padding:4px 0 2px}
+.ask-col{display:flex;flex-direction:column;align-items:center;gap:22px;margin-top:48px;padding-top:40px;border-top:1px solid var(--border)}
+.ask-col .ask-shruti{width:100%;max-width:720px}
+.ai-closing{text-align:center}
 .ai-closing-pre{font-size:.92rem;color:var(--muted);margin-bottom:6px;letter-spacing:.01em}
-.ai-closing-main{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,2.4vw,1.85rem);font-weight:700;color:var(--ink);line-height:1.15}
+.ai-closing-main{font-family:'Outfit',sans-serif;font-size:clamp(1.85rem,4vw,2.65rem);font-weight:700;color:var(--ink);line-height:1.15}
 .ai-closing-arrow{color:var(--coral);display:inline-block;animation:bounce-down 1.5s ease-in-out infinite}
 @keyframes bounce-down{0%,100%{transform:translateY(0)}55%{transform:translateY(8px)}}
 @keyframes arrow-pulse{0%,100%{opacity:.3;transform:translateX(0)}50%{opacity:.7;transform:translateX(3px)}}
@@ -243,7 +243,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ai-stage-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);white-space:nowrap}
 .ai-stage-icons{display:flex;gap:10px;align-items:center;justify-content:center}
 .ai-stage-arrow{color:var(--coral);opacity:.4;font-size:1.2rem;padding:0 6px;flex-shrink:0;animation:arrow-pulse 1.8s ease-in-out infinite}
-.ai-bottom{display:grid;grid-template-columns:58fr 42fr;gap:16px;align-items:stretch}
+.ai-bottom{display:block}
 .ask-shruti{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px}
 .ask-shruti h3{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin:0}
 .ask-subtitle{font-size:.8rem;color:var(--mid);line-height:1.6;margin:0}
@@ -254,6 +254,7 @@ h2.st{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font
 .ask-suggest button:hover{color:var(--coral);border-color:var(--coral)}
 .ask-msg{max-width:88%;font-size:.8rem;line-height:1.6;padding:9px 13px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}
 .ask-msg.user{align-self:flex-end;background:var(--coral);color:#fff;border-bottom-right-radius:4px}
+.ask-msg.bot a{color:var(--coral);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .ask-msg.bot{align-self:flex-start;background:var(--white);color:var(--ink);border:1px solid var(--border);border-bottom-left-radius:4px}
 .ask-typing{display:inline-flex;gap:4px;align-items:center;height:12px}
 .ask-typing span{width:6px;height:6px;border-radius:50%;background:var(--coral-mid);animation:ask-dot 1.2s infinite ease-in-out}
@@ -338,7 +339,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   #contact{padding:60px 22px} footer{padding:18px 22px}
   .ai-workflow{flex-wrap:wrap;gap:10px 0;padding:14px}
   .ai-stage-arrow{display:none}
-  .ai-bottom{grid-template-columns:1fr}
+  .ai-bottom{display:block}.ai-cards{grid-template-columns:1fr}.ask-col{margin-top:36px;padding-top:30px}
   .ai-tagline{font-size:.9rem;margin-bottom:24px}
   .ai-closing-main{font-size:1.6rem}
   .ai-card-tag{display:none}
@@ -582,24 +583,24 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
         <div class="ask-col">
           <div class="ai-closing">
           <p class="ai-closing-pre">Anyway, enough talking about AI.</p>
-          <p class="ai-closing-main">Go ask it something.<span class="ai-closing-arrow"> ↓</span></p>
+          <p class="ai-closing-main">Go ask Ally. She's got my back.<span class="ai-closing-arrow"> ↓</span></p>
           </div>
         <div class="ask-shruti">
-          <div class="ask-shruti-header"><h3>Ask Shruti</h3><span class="ask-badge">AI · Beta</span></div>
-          <p class="ask-subtitle">An AI that knows my background — ask it anything about my experience</p>
+          <div class="ask-shruti-header"><h3>Ally 🤝</h3><span class="ask-badge">AI · Beta</span></div>
+          <p class="ask-subtitle">My chatbot friend. She knows my story better than my LinkedIn does — ask her anything.</p>
           <div class="ask-messages" id="askMsgs" aria-live="polite">
             <div class="ask-empty" id="askEmpty">
               <p class="ask-placeholder">Try one of these:</p>
               <div class="ask-suggest">
-                <button type="button">What does Shruti do at Altimetrik?</button>
-                <button type="button">What marketing work has she done?</button>
-                <button type="button">How does she use AI?</button>
-                <button type="button">Why rifle shooting?</button>
+                <button type="button">Who are you, Ally? 👋</button>
+                <button type="button">What makes Shruti different? ✨</button>
+                <button type="button">Marketing or product: which is she? 🤔</button>
+                <button type="button">Why rifle shooting? 🎯</button>
               </div>
             </div>
           </div>
           <form class="ask-input-row" id="askForm" autocomplete="off">
-            <input type="text" id="askInput" placeholder="Ask something about Shruti…" maxlength="500" aria-label="Your question"/>
+            <input type="text" id="askInput" placeholder="Ask Ally about Shruti…" maxlength="500" aria-label="Your question"/>
             <button type="submit" id="askSend">Send</button>
           </form>
           <p class="ask-note">AI-generated answers can be wrong. For anything important, email Shruti.</p>
@@ -756,7 +757,12 @@ const ACH=[
         empty=document.getElementById("askEmpty");
   if(!form)return;
   const history=[];let busy=false;
-  const add=(role,text)=>{const d=document.createElement("div");d.className="ask-msg "+role;d.textContent=text;box.appendChild(d);box.scrollTop=box.scrollHeight;return d;};
+  const esc=t=>t.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  // Escape the reply, strip stray markdown, then turn emails and LinkedIn into links
+  const linkify=t=>esc(t.replace(/\*\*(.+?)\*\*/g,"$1"))
+    .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g,m=>`<a href="mailto:${m}">${m}</a>`)
+    .replace(/(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?/g,m=>`<a href="https://www.linkedin.com/in/shruti-singh-26b752186" target="_blank" rel="noopener">LinkedIn</a>`);
+  const add=(role,text)=>{const d=document.createElement("div");d.className="ask-msg "+role;if(role==="bot")d.innerHTML=linkify(text);else d.textContent=text;box.appendChild(d);box.scrollTop=box.scrollHeight;return d;};
   async function ask(q){
     q=q.trim().slice(0,500); if(!q||busy)return;
     busy=true;send.disabled=true;input.value="";
@@ -770,7 +776,7 @@ const ACH=[
       reply=d.reply||"Sorry, something went wrong. Please try again.";
       if(r.ok)history.push({role:"assistant",content:reply});else history.pop();
     }catch(e){reply="I couldn't connect just now. Please try again in a moment.";history.pop();}
-    t.textContent=reply;box.scrollTop=box.scrollHeight;
+    t.innerHTML=linkify(reply);box.scrollTop=box.scrollHeight;
     busy=false;send.disabled=false;input.focus({preventScroll:true});
   }
   form.addEventListener("submit",e=>{e.preventDefault();ask(input.value);});
