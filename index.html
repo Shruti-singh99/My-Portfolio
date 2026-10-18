@@ -485,7 +485,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
     <li><a href="#work">Work</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#shooting">Shooting</a></li>
-    <li><a href="#books">Books</a></li>
+    <li><a href="#books">Bookshelf</a></li>
     <li><a href="#ai">AI & Vibe</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -603,7 +603,7 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
 
 <!-- SELECTED WORK -->
 <section id="work">
-  <div class="label">Selected work</div>
+  <div class="label">Proof of Work</div>
   <h2 class="st">Less telling.<br/>More showing.</h2>
   <p class="section-intro reveal">Four moments that shaped how I work, from a rickshaw full of posters to a product roadmap.</p>
   <div class="work-grid reveal">
@@ -825,10 +825,10 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
     <a href="#about"><span class="msheet-n">01</span><span class="msheet-t">About</span><span class="msheet-arrow">→</span></a>
     <a href="#education"><span class="msheet-n">02</span><span class="msheet-t">Education</span><span class="msheet-arrow">→</span></a>
     <a href="#experience"><span class="msheet-n">03</span><span class="msheet-t">Experience</span><span class="msheet-arrow">→</span></a>
-    <a href="#work"><span class="msheet-n">04</span><span class="msheet-t">Selected work</span><span class="msheet-arrow">→</span></a>
+    <a href="#work"><span class="msheet-n">04</span><span class="msheet-t">Proof of Work</span><span class="msheet-arrow">→</span></a>
     <a href="#skills"><span class="msheet-n">05</span><span class="msheet-t">Skills</span><span class="msheet-arrow">→</span></a>
     <a href="#shooting"><span class="msheet-n">06</span><span class="msheet-t">Shooting</span><span class="msheet-arrow">→</span></a>
-    <a href="#books"><span class="msheet-n">07</span><span class="msheet-t">Books</span><span class="msheet-arrow">→</span></a>
+    <a href="#books"><span class="msheet-n">07</span><span class="msheet-t">Bookshelf</span><span class="msheet-arrow">→</span></a>
     <a href="#ai"><span class="msheet-n">08</span><span class="msheet-t">AI &amp; Vibe</span><span class="msheet-arrow">→</span></a>
     <a href="#contact"><span class="msheet-n">09</span><span class="msheet-t">Contact</span><span class="msheet-arrow">→</span></a>
   </div>
@@ -1021,9 +1021,10 @@ BOOKS.forEach(b=>{
 });
 
 // Tap-to-flip for touch devices (hover doesn't work on mobile)
-if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+{
   document.querySelectorAll('.book-card').forEach(card=>{
     card.addEventListener('click',()=>{
+      if(window.matchMedia('(hover:hover) and (pointer:fine)').matches)return; // mouse users flip on hover
       const wasFlipped=card.classList.contains('flipped');
       document.querySelectorAll('.book-card').forEach(c=>c.classList.remove('flipped'));
       if(!wasFlipped)card.classList.add('flipped');
