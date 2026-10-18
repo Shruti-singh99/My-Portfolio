@@ -390,6 +390,42 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
   .ai-closing-main{font-size:1.6rem}
   .ai-card-tag{display:none}
 }
+.only-mob{display:none}
+/* ===== PHONES ONLY ===== */
+@media(max-width:640px){
+  .only-mob{display:revert}.only-desk{display:none}
+  /* Landing screen: no forced full-screen height */
+  #hero{min-height:auto;padding:84px 22px 36px}
+  .hero-scroll{display:none}
+  .hero-cta{margin-top:24px}
+  /* Education: compact 2 x 2 */
+  .edu-row{grid-template-columns:1fr 1fr;gap:10px}
+  .edu-card{padding:14px;border-radius:var(--r)}
+  .edu-card:hover{transform:none}
+  .edu-card-top{gap:7px;margin-bottom:9px}
+  .edu-logo{width:32px;height:32px;border-radius:7px;padding:2px}
+  .edu-year-tag{font-size:.58rem;padding:2px 7px}
+  .edu-deg{font-size:.8rem;line-height:1.25}
+  .edu-inst{font-size:.7rem;line-height:1.35}
+  .edu-score{font-size:.7rem}
+  /* Superpower: vertical timeline, each stage next to its line */
+  .career-tl{display:grid;grid-template-columns:64px 1fr;column-gap:14px;row-gap:14px;position:relative;margin-bottom:32px}
+  .career-tl::before{content:'';position:absolute;left:31px;top:24px;bottom:24px;width:2px;background:var(--coral-mid)}
+  .career-track,.career-chips{display:contents}
+  .career-col{grid-column:1;gap:4px;align-self:center}
+  .career-col .career-lbl{font-size:10.5px;background:var(--bg);padding:0 3px;position:relative;z-index:1}
+  .career-col:nth-child(1){grid-row:1}.career-col:nth-child(2){grid-row:2}.career-col:nth-child(3){grid-row:3}.career-col:nth-child(4){grid-row:4}
+  .career-chip{grid-column:2;align-self:center;text-align:left;font-size:12px;padding:12px 14px}
+  .career-chip:nth-child(1){grid-row:1}.career-chip:nth-child(2){grid-row:2}.career-chip:nth-child(3){grid-row:3}.career-chip:nth-child(4){grid-row:4}
+  /* Books: tap hint + show first 6 */
+  .books-tap-hint{font-size:.8rem;color:var(--coral);font-weight:500;margin:-18px 0 18px}
+  .books-grid:not(.show-all) .book-card:nth-child(n+7){display:none}
+  .books-more{display:block;margin:22px auto 0;padding:10px 20px;border-radius:100px;border:1px solid var(--coral);background:none;color:var(--coral);font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer}
+  /* Selected work: card text smaller than the section title */
+  .work-stat{font-size:1.35rem}
+  .work-card h3{font-size:.85rem}
+  .work-stat-lbl{font-size:.7rem}
+}
 </style>
 </head>
 <body>
@@ -634,9 +670,11 @@ footer{padding:20px 60px;text-align:center;font-size:.74rem;color:var(--muted);b
 <!-- BOOKS -->
 <section id="books">
   <div class="label">Bookshelf</div>
-  <h2 class="st">Books I've read.<br/>Hover to see my take.</h2>
+  <h2 class="st">Books I've read.<br/><span class="only-desk">Hover</span><span class="only-mob">Tap</span> to see my take.</h2>
   <p class="books-intro reveal">I read slowly and deliberately — one book at a time. The through-line: books that question received wisdom about religion, identity, purpose, and power.</p>
+  <p class="books-tap-hint only-mob">👆 Tap a cover to flip it and read my take.</p>
   <div class="books-grid reveal" id="bg"></div>
+  <button type="button" class="books-more only-mob" id="booksMore" aria-expanded="false">Show all books ▾</button>
 </section>
 
 <!-- AI -->
@@ -1010,6 +1048,19 @@ cv.addEventListener("click",()=>{
   }
   if(shots>=5){gameOver=true;document.getElementById("gm").textContent=`Final score: ${score} / 50`;}
 });
+
+// BOOKS — "show all" toggle (phones only; the button is hidden on desktop)
+(function(){
+  const btn=document.getElementById("booksMore"),grid=document.getElementById("bg");
+  if(!btn||!grid)return;
+  const n=grid.children.length; btn.textContent=`Show all ${n} books ▾`;
+  btn.addEventListener("click",()=>{
+    const all=grid.classList.toggle("show-all");
+    btn.textContent=all?"Show fewer ▴":`Show all ${n} books ▾`;
+    btn.setAttribute("aria-expanded",String(all));
+    if(!all)document.getElementById("books").scrollIntoView({behavior:"smooth"});
+  });
+})();
 
 // SELECTED WORK — on phones, cards open and close when tapped
 document.querySelectorAll(".work-card").forEach(card=>{
